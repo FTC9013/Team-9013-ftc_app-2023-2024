@@ -45,37 +45,24 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Robot: Sweeper Arm", group = "Robot")
+@TeleOp(name = "Primary Op Mode 23-24", group = "Robot")
 
-public class SweeperArm_Controller extends LinearOpMode
+public class PrimaryOpMode2324 extends LinearOpMode
 {
   
   /* Declare OpMode members. */
   public DcMotor driveMotor = null;
-  
+  public Sweeper sweeper;
+  public AirplaneLauncher airplane;
+  public MecanumDriveChassis driveChassis;
   
   @Override
   public void runOpMode()
   {
     
-    double drive;
-    
-    
-    // Define and Initialize Motors
-    driveMotor = hardwareMap.get(DcMotor.class, "corehexmotor");
-    
-    // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
-    // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
-    // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-    driveMotor.setDirection(DcMotor.Direction.REVERSE);
-    
-    // If there are encoders connected, switch to RUN_USING_ENCODER mode for greater accuracy
-    // leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    // rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    
-    // Define and initialize ALL installed servos.
-    
-    // Send telemetry message to signify robot waiting;
+    sweeper = new Sweeper(hardwareMap, telemetry);
+    airplane = new AirplaneLauncher(hardwareMap, telemetry);
+    driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
     telemetry.update();
     
@@ -85,31 +72,33 @@ public class SweeperArm_Controller extends LinearOpMode
     // run until the end of the match (driver presses STOP)
     while (opModeIsActive())
     {
-      
-      drive = 0;
-      
-      
       if (gamepad1.left_bumper)
       {
-        drive = 1;
+        sweeper.sweepIn();
       }
-      else if (gamepad1.right_bumper){
-        drive = -1;
+      else if (gamepad1.right_bumper)
+      {
+        sweeper.sweepOut();
       }
-      
-      
-      driveMotor.setPower(drive);
-      // Use gamepad left & right Bumpers to open and close the claw
-      
-      
-      // Use gamepad buttons to move arm up (Y) and down (A)
-      
-      
-      // Send telemetry message to signify robot running;
-      telemetry.addData("left", "%.2f", drive);
-      
+      else
+      {
+        sweeper.sweepStop();
+      }
+      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75) {
+        airplane.launch();
+      }
+      if (gamepad1.right_trigger > 0.75 && gamepad1.x){
+        airplane.resetLauncher();
+      }
       telemetry.update();
-      
+  
+      telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
+      telemetry.addData("LStickX", gamepad1.left_stick_x);
+      telemetry.addData("vD: ", 1000);
+      telemetry.update();
+  
+      driveChassis.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
+        gamepad1.right_stick_x, gamepad1.left_bumper);
       // Pace this loop so jaw action is reasonable speed.
       sleep(50);
     }

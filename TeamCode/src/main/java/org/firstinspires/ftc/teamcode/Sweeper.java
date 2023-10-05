@@ -33,37 +33,57 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+/*
+ * This OpMode executes a POV Game style Teleop for a direct drive robot
+ * The code is structured as a LinearOpMode
+ *
+ * In this mode the left stick moves the robot FWD and back, the Right stick turns left and right.
+ * It raises and lowers the arm using the Gamepad Y and A buttons respectively.
+ * It also opens and closes the claws slowly using the left and right Bumper buttons.
+ *
+ * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
+ * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
+ */
 
-public class AirplaneLauncher
+public class Sweeper
 {
-  
-  /* Declare OpMode members. */
-  public Servo airplaneMotor = null;
+  public DcMotor driveMotor = null;
   private final Telemetry telemetry;
   
-  AirplaneLauncher(HardwareMap hardwareMap, Telemetry theTelemetry)
+  Sweeper(HardwareMap hardwareMap, Telemetry theTelemetry)
   {
-    telemetry = theTelemetry;
-    airplaneMotor = hardwareMap.get(Servo.class, "RocketLauncher");
     
-    airplaneMotor.setDirection(Servo.Direction.REVERSE);
-    airplaneMotor.setPosition(0.5);
+    telemetry = theTelemetry;
+    double drive;
+    
+    
+    // Define and Initialize Motors
+    driveMotor = hardwareMap.get(DcMotor.class, "sweeper_motor");
+    
+    // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
+    // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
+    // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
+    driveMotor.setDirection(DcMotor.Direction.REVERSE);
+    
   }
   
-  public void launch()
+  public void sweepIn()
   {
-    airplaneMotor.setPosition(-1);
-    telemetry.addLine("Launching Airplane");
+    driveMotor.setPower(1);
+    telemetry.addLine("Sweeping In");
   }
-  public void resetLauncher()
+  
+  public void sweepOut()
   {
-    airplaneMotor.setPosition(0.5);
-    telemetry.addLine("Resetting Servo Position");
+    driveMotor.setPower(-1);
+    telemetry.addLine("Sweeping Out");
+  }
+  
+  public void sweepStop()
+  {
+    driveMotor.setPower(0);
   }
 }
-
-
