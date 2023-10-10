@@ -45,17 +45,16 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Primary Op Mode 23-24", group = "Robot")
+@TeleOp(name = "Sweeper Op Mode 23-24", group = "Robot")
 
-public class PrimaryOpMode2324 extends LinearOpMode
+public class SweeperTeleOp extends LinearOpMode
 {
   
   /* Declare OpMode members. */
   public DcMotor driveMotor = null;
   public Sweeper sweeper;
   public AirplaneLauncher airplane;
-  public MecanumDriveChassis driveChassis;
-  public Prop_Sensors prop_sensors;
+  //public MecanumDriveChassis driveChassis;
   
   @Override
   public void runOpMode()
@@ -63,8 +62,7 @@ public class PrimaryOpMode2324 extends LinearOpMode
     
     sweeper = new Sweeper(hardwareMap, telemetry);
     airplane = new AirplaneLauncher(hardwareMap, telemetry);
-    driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
-    prop_sensors = new Prop_Sensors(hardwareMap, telemetry);
+    //driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
     telemetry.update();
     
@@ -92,16 +90,15 @@ public class PrimaryOpMode2324 extends LinearOpMode
       if (gamepad1.right_trigger > 0.75 && gamepad1.x){
         airplane.resetLauncher();
       }
-      prop_sensors.detectProp();
       telemetry.update();
   
-      telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
-      telemetry.addData("LStickX", gamepad1.left_stick_x);
-      telemetry.addData("vD: ", 1000);
+      //telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
+      //telemetry.addData("LStickX", gamepad1.left_stick_x);
+      //telemetry.addData("vD: ", 1000);
       telemetry.update();
   
-      driveChassis.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
-        gamepad1.right_stick_x, gamepad1.left_bumper);
+      //driveChassis.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
+        //gamepad1.right_stick_x, gamepad1.left_bumper);
       // Pace this loop so jaw action is reasonable speed.
       sleep(50);
     }

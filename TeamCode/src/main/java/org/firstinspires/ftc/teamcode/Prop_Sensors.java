@@ -33,14 +33,15 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
-import com.qualcomm.robotcore.hardware.SwitchableLight;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
+import androidx.annotation.NonNull;
 
 /*
  * This OpMode shows how to use a color sensor in a generic
@@ -65,20 +66,37 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
-@TeleOp(name = "sensor_color", group = "Sensor")
 
-public class SensorColor extends LinearOpMode {
-
+public class Prop_Sensors
+{
+  
   /** The colorSensor field will contain a reference to our color sensor hardware object */
   NormalizedColorSensor frontSensor;
   NormalizedColorSensor rightSensor;
   NormalizedColorSensor leftSensor;
-
+  
   /** The relativeLayout field is used to aid in providing interesting visual feedback
    * in this sample application; you probably *don't* need this when you use a color sensor on your
    * robot. Note that you won't see anything change on the Driver Station, only on the Robot Controller. */
   View relativeLayout;
-
+  private final Telemetry telemetry;
+  
+  enum PropSide
+  {Right, Left, Front, No}
+  
+  Prop_Sensors(@NonNull HardwareMap hardwareMap, Telemetry theTelemetry)
+  {
+    telemetry = theTelemetry;
+    int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
+    relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
+    frontSensor = hardwareMap.get(NormalizedColorSensor.class, "frontSensor");
+    leftSensor = hardwareMap.get(NormalizedColorSensor.class, "leftSensor");
+    rightSensor = hardwareMap.get(NormalizedColorSensor.class, "rightSensor");
+    
+  }
+  
+  
+  
   /*
    * The runOpMode() method is the root of this OpMode, as it is in all LinearOpModes.
    * Our implementation here, though is a bit unusual: we've decided to put all the actual work
@@ -89,29 +107,10 @@ public class SensorColor extends LinearOpMode {
    * block around the main, core logic, and an easy way to make that all clear was to separate
    * the former from the latter in separate methods.
    */
-  @Override public void runOpMode() {
-
-    // Get a reference to the RelativeLayout so we can later change the background
-    // color of the Robot Controller app to match the hue detected by the RGB sensor.
-    int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
-    relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
-
-    try {
-      runSample(); // actually execute the sample
-    } finally {
-      // On the way out, *guarantee* that the background is reasonable. It doesn't actually start off
-      // as pure white, but it's too much work to dig out what actually was used, and this is good
-      // enough to at least make the screen reasonable again.
-      // Set the panel back to the default color
-      relativeLayout.post(new Runnable() {
-        public void run() {
-          relativeLayout.setBackgroundColor(Color.WHITE);
-        }
-      });
-      }
-  }
-
-  protected void runSample() {
+  
+  
+  protected PropSide detectProp()
+  {
     // You can give the sensor a gain value, will be multiplied by the sensor's raw value before the
     // normalized color values are calculated. Color sensors (especially the REV Color Sensor V3)
     // can give very low values (depending on the lighting conditions), which only use a small part
@@ -121,113 +120,72 @@ public class SensorColor extends LinearOpMode {
     // actually looking at. For this reason, it's better to err on the side of a lower gain
     // (but always greater than  or equal to 1).
     float gain = 2;
-
+    
     // Once per loop, we will update this hsvValues array. The first element (0) will contain the
     // hue, the second element (1) will contain the saturation, and the third element (2) will
     // contain the value. See http://web.archive.org/web/20190311170843/https://infohost.nmt.edu/tcc/help/pubs/colortheory/web/hsv.html
     // for an explanation of HSV color.
     final float[] hsvValues = new float[3];
-
+    
     // xButtonPreviouslyPressed and xButtonCurrentlyPressed keep track of the previous and current
     // state of the X button on the gamepad
-    boolean xButtonPreviouslyPressed = false;
-    boolean xButtonCurrentlyPressed = false;
-
+    
     // Get a reference to our sensor object. It's recommended to use NormalizedColorSensor over
     // ColorSensor, because NormalizedColorSensor consistently gives values between 0 and 1, while
-    // the values you get from ColorSensor are dependent on the specific sensor you're using.
-    frontSensor = hardwareMap.get(NormalizedColorSensor.class, "frontSensor");
-    leftSensor = hardwareMap.get(NormalizedColorSensor.class, "leftSensor");
-    rightSensor = hardwareMap.get(NormalizedColorSensor.class, "rightSensor");
-
-    // If possible, turn the light on in the beginning (it might already be on anyway,
-    // we just make sure it is if we can).
-    if (frontSensor instanceof SwitchableLight) {
-      ((SwitchableLight) frontSensor).enableLight(true);
+    // the values you get from ColorSensor are dependent on the specific sensor you're using
+    
+    
+    // Tell the sensor our desired gain value (normally you would do this during initialization,
+    // not during the loop)
+    frontSensor.setGain(gain);
+    leftSensor.setGain(gain);
+    rightSensor.setGain(gain);
+    
+    // Get the normalized colors from the sensor
+    NormalizedRGBA frontColors = frontSensor.getNormalizedColors();
+    NormalizedRGBA leftColors = leftSensor.getNormalizedColors();
+    NormalizedRGBA rightColors = rightSensor.getNormalizedColors();
+    
+    
+    /* Use telemetry to display feedback on the driver station. We show the red, green, and blue
+     * normalized values from the sensor (in the range of 0 to 1), as well as the equivalent
+     * HSV (hue, saturation and value) values. See http://web.archive.org/web/20190311170843/https://infohost.nmt.edu/tcc/help/pubs/colortheory/web/hsv.html
+     * for an explanation of HSV color. */
+    
+    // Update the hsvValues array by passing it to Color.colorToHSV()
+    Color.colorToHSV(frontColors.toColor(), hsvValues);
+    /* If this color sensor also has a distance sensor, display the measured distance.
+     * Note that the reported distance is only useful at very close range, and is impacted by
+     * ambient light and surface reflectivity. */
+    if (frontSensor instanceof DistanceSensor)
+    {
+      telemetry.addData("Port 0, Front Sensor | Distance (cm)", "%.3f", ((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM));
+      if (((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM) < 3.5)
+      {
+        telemetry.addLine("It on de front");
+        return PropSide.Front;
+      }
     }
-
-    // Wait for the start button to be pressed.
-    waitForStart();
-
-    // Loop until we are asked to stop
-    while (opModeIsActive()) {
-      // Explain basic gain information via telemetry
-      telemetry.addLine("Hold the A button on gamepad 1 to increase gain, or B to decrease it.\n");
-      telemetry.addLine("Higher gain values mean that the sensor will report larger numbers for Red, Green, and Blue, and Value\n");
-
-      // Update the gain value if either of the A or B gamepad buttons is being held
-      if (gamepad1.a) {
-        // Only increase the gain by a small amount, since this loop will occur multiple times per second.
-        gain += 0.005;
-      } else if (gamepad1.b && gain > 1) { // A gain of less than 1 will make the values smaller, which is not helpful.
-        gain -= 0.005;
+    
+    if (leftSensor instanceof DistanceSensor)
+    {
+      telemetry.addData("Port 1, Left Sensor | Distance (cm)", "%.3f", ((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM));
+      if (((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM) < 3.5)
+      {
+        telemetry.addLine("It on de lefte");
+        return PropSide.Left;
       }
-
-      // Show the gain value via telemetry
-      telemetry.addData("Gain", gain);
-
-      // Tell the sensor our desired gain value (normally you would do this during initialization,
-      // not during the loop)
-      frontSensor.setGain(gain);
-
-      // Check the status of the X button on the gamepad
-      xButtonCurrentlyPressed = gamepad1.x;
-
-      // If the button state is different than what it was, then act
-      if (xButtonCurrentlyPressed != xButtonPreviouslyPressed) {
-        // If the button is (now) down, then toggle the light
-        if (xButtonCurrentlyPressed) {
-          if (frontSensor instanceof SwitchableLight) {
-            SwitchableLight light = (SwitchableLight) frontSensor;
-            light.enableLight(!light.isLightOn());
-          }
-        }
-      }
-      xButtonPreviouslyPressed = xButtonCurrentlyPressed;
-
-      // Get the normalized colors from the sensor
-      NormalizedRGBA frontColors = frontSensor.getNormalizedColors();
-      NormalizedRGBA leftColors = leftSensor.getNormalizedColors();
-      NormalizedRGBA rightColors = rightSensor.getNormalizedColors();
-      
-
-      /* Use telemetry to display feedback on the driver station. We show the red, green, and blue
-       * normalized values from the sensor (in the range of 0 to 1), as well as the equivalent
-       * HSV (hue, saturation and value) values. See http://web.archive.org/web/20190311170843/https://infohost.nmt.edu/tcc/help/pubs/colortheory/web/hsv.html
-       * for an explanation of HSV color. */
-
-      // Update the hsvValues array by passing it to Color.colorToHSV()
-      Color.colorToHSV(frontColors.toColor(), hsvValues);
-      /* If this color sensor also has a distance sensor, display the measured distance.
-       * Note that the reported distance is only useful at very close range, and is impacted by
-       * ambient light and surface reflectivity. */
-      if (frontSensor instanceof DistanceSensor) {
-        telemetry.addData("Port 0, Front Sensor | Distance (cm)", "%.3f", ((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM));
-        if (((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM) < 3.5) {
-          telemetry.addLine("It on de front");
-        }
-      }
-  
-      if (leftSensor instanceof DistanceSensor) {
-        telemetry.addData("Port 1, Left Sensor | Distance (cm)", "%.3f", ((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM));
-        if (((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM) < 3.5) {
-          telemetry.addLine("It on de lefte");
-        }
-      }
-  
-      if (rightSensor instanceof DistanceSensor) {
-        telemetry.addData("Port 2, Right Sensor | Distance (cm)", "%.3f", ((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM));
-        if (((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM) < 3.5) {
-          telemetry.addLine("It on de rite");
-        }
-      }
-      telemetry.update();
-      // Change the Robot Controller's background color to match the color detected by the color sensor.
-      relativeLayout.post(new Runnable() {
-        public void run() {
-          relativeLayout.setBackgroundColor(Color.HSVToColor(hsvValues));
-        }
-      });
     }
+    
+    if (rightSensor instanceof DistanceSensor)
+    {
+      telemetry.addData("Port 2, Right Sensor | Distance (cm)", "%.3f", ((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM));
+      if (((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM) < 3.5)
+      {
+        telemetry.addLine("It on de rite");
+        return PropSide.Right;
+      }
+    }
+    return PropSide.No;
   }
 }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class MecanumDriveChassis
 {
+  private ElapsedTime runTime = new ElapsedTime();
   private final DcMotor leftFrontDrive;
   private final DcMotor leftRearDrive;
   private final DcMotor rightFrontDrive;
@@ -281,5 +283,67 @@ public class MecanumDriveChassis
     leftRearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     rightRearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+  }
+    public void moveForward(){
+      rightFrontDrive.setPower(1);
+      leftFrontDrive.setPower(1);
+      rightRearDrive.setPower(1);
+      leftRearDrive.setPower(1);
+}
+  public void turnLeft() {
+    double runDuration = 1.25;
+    runTime.reset();
+    rightFrontDrive.setPower(1);
+    leftFrontDrive.setPower(-1);
+    rightRearDrive.setPower(1);
+    leftRearDrive.setPower(-1);
+    while (runTime.time() < runDuration)
+    {
+      //Do nothing. Allows the motors to spin
+    }
+    stop_motors();
+  }
+  public void turnRight() {
+    double runDuration = 1.25;
+    runTime.reset();
+    rightFrontDrive.setPower(-1);
+    leftFrontDrive.setPower(1);
+    rightRearDrive.setPower(-1);
+    leftRearDrive.setPower(1);
+    while (runTime.time() < runDuration)
+    {
+      //Do nothing. Allows the motors to spin
+    }
+    stop_motors();
+  }
+  public void stop_motors(){
+    rightFrontDrive.setPower(0);
+    rightRearDrive.setPower(0);
+    leftFrontDrive.setPower(0);
+    leftRearDrive.setPower(0);
+  }
+  public void strafeLeft(double runDuration){
+    runTime.reset();
+    rightFrontDrive.setPower(-1);
+    leftFrontDrive.setPower(-1);
+    rightRearDrive.setPower(1);
+    leftRearDrive.setPower(1);
+    while (runTime.time() < runDuration)
+    {
+      //Do nothing. Allows the motors to spin
+    }
+    stop_motors();
+  }
+  public void strafeRight(double runDuration){
+    runTime.reset();
+    rightFrontDrive.setPower(1);
+    leftFrontDrive.setPower(1);
+    rightRearDrive.setPower(-1);
+    leftRearDrive.setPower(-1);
+    while (runTime.time() < runDuration)
+    {
+      //Do nothing. Allows the motors to spin
+    }
+    stop_motors();
   }
 }
