@@ -284,13 +284,17 @@ public class MecanumDriveChassis
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     rightRearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
   }
-    public void moveForward(){
-      rightFrontDrive.setPower(1);
-      leftFrontDrive.setPower(1);
-      rightRearDrive.setPower(1);
-      leftRearDrive.setPower(1);
-}
-  public void turnLeft() {
+  
+  public void moveForward()
+  {
+    rightFrontDrive.setPower(1);
+    leftFrontDrive.setPower(1);
+    rightRearDrive.setPower(1);
+    leftRearDrive.setPower(1);
+  }
+  
+  public void turnLeft()
+  {
     double runDuration = 1.25;
     runTime.reset();
     rightFrontDrive.setPower(1);
@@ -303,7 +307,9 @@ public class MecanumDriveChassis
     }
     stop_motors();
   }
-  public void turnRight() {
+  
+  public void turnRight()
+  {
     double runDuration = 1.25;
     runTime.reset();
     rightFrontDrive.setPower(-1);
@@ -316,13 +322,17 @@ public class MecanumDriveChassis
     }
     stop_motors();
   }
-  public void stop_motors(){
+  
+  public void stop_motors()
+  {
     rightFrontDrive.setPower(0);
     rightRearDrive.setPower(0);
     leftFrontDrive.setPower(0);
     leftRearDrive.setPower(0);
   }
-  public void strafeLeft(double runDuration){
+  
+  public void strafeLeft(double runDuration)
+  {
     runTime.reset();
     rightFrontDrive.setPower(-1);
     leftFrontDrive.setPower(-1);
@@ -334,7 +344,9 @@ public class MecanumDriveChassis
     }
     stop_motors();
   }
-  public void strafeRight(double runDuration){
+  
+  public void strafeRight(double runDuration)
+  {
     runTime.reset();
     rightFrontDrive.setPower(1);
     leftFrontDrive.setPower(1);
