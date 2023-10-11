@@ -29,9 +29,6 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -59,6 +56,7 @@ public class AirplaneLauncher
     airplaneMotor.setPosition(-1);
     telemetry.addLine("Launching Airplane");
   }
+  
   public void resetLauncher()
   {
     airplaneMotor.setPosition(0.5);
