@@ -25,22 +25,37 @@ public class Autonomous extends LinearOpMode
     waitForStart();
     runtime.reset();
     // run until the end of the match (driver presses STOP)
-    while (opModeIsActive() && propSensors.detectProp() != Prop_Sensors.PropSide.No ) {
-      driveChassis.moveForward();
-      
-    }
-    driveChassis.stop_motors();
-    if (propSensors.detectProp() == Prop_Sensors.PropSide.Front ) {
-      pixelDropper.drop_pixel();
-    }
-    else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left){
+    if (opModeIsActive())
+    {
+      driveChassis.moveForward(1500);
+      telemetry.update();
       driveChassis.turnLeft();
-      pixelDropper.drop_pixel();
-    }
-    else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right){
+      telemetry.update();
       driveChassis.turnRight();
-      pixelDropper.drop_pixel();
+      telemetry.update();
+      driveChassis.strafeLeft(500);
+      telemetry.update();
+      driveChassis.strafeRight(500);
       
+      driveChassis.stop_motors();
+      if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
+      {
+        pixelDropper.drop_pixel();
+        telemetry.addLine("Prop on fronte");
+      } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
+      {
+        driveChassis.turnLeft();
+        telemetry.addLine("Prop on Lefte");
+        pixelDropper.drop_pixel();
+      } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
+      {
+        driveChassis.turnRight();
+        pixelDropper.drop_pixel();
+        telemetry.addLine("Prop on the Righty");
+        
+      }
+      pixelDropper.resetDropper();
+      telemetry.update();
     }
   }
 }

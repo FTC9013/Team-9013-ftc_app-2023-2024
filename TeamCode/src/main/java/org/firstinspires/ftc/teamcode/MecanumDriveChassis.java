@@ -13,6 +13,7 @@ import java.util.List;
 public class MecanumDriveChassis
 {
   private ElapsedTime runTime = new ElapsedTime();
+  double autonomousPower = 0.5;
   private final DcMotor leftFrontDrive;
   private final DcMotor leftRearDrive;
   private final DcMotor rightFrontDrive;
@@ -285,38 +286,106 @@ public class MecanumDriveChassis
     rightRearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
   }
   
-  public void moveForward()
+  public void moveForward(int distance)
   {
-    rightFrontDrive.setPower(1);
-    leftFrontDrive.setPower(1);
-    rightRearDrive.setPower(1);
-    leftRearDrive.setPower(1);
-  }
-  
-  public void turnLeft()
-  {
-    double runDuration = 1.25;
-    runTime.reset();
-    rightFrontDrive.setPower(1);
-    leftFrontDrive.setPower(-1);
-    rightRearDrive.setPower(1);
-    leftRearDrive.setPower(-1);
-    while (runTime.time() < runDuration)
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    
+    leftFrontDrive.setTargetPosition(distance);
+    rightFrontDrive.setTargetPosition(distance);
+    leftRearDrive.setTargetPosition(distance);
+    rightRearDrive.setTargetPosition(distance);
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    
+    leftFrontDrive.setPower(autonomousPower);
+    leftRearDrive.setPower(autonomousPower);
+    rightFrontDrive.setPower(autonomousPower);
+    rightRearDrive.setPower(autonomousPower);
+    while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
     {
       //Do nothing. Allows the motors to spin
     }
     stop_motors();
   }
   
-  public void turnRight()
+  public void strafeLeft(int distance)
   {
-    double runDuration = 1.25;
-    runTime.reset();
-    rightFrontDrive.setPower(-1);
-    leftFrontDrive.setPower(1);
-    rightRearDrive.setPower(-1);
-    leftRearDrive.setPower(1);
-    while (runTime.time() < runDuration)
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    
+    leftFrontDrive.setTargetPosition(-distance);
+    rightFrontDrive.setTargetPosition(distance);
+    leftRearDrive.setTargetPosition(-distance);
+    rightRearDrive.setTargetPosition(distance);
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    
+    leftFrontDrive.setPower(-autonomousPower);
+    leftRearDrive.setPower(-autonomousPower);
+    rightFrontDrive.setPower(autonomousPower);
+    rightRearDrive.setPower(autonomousPower);
+    while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
+    {
+      //Do nothing. Allows the motors to spin
+    }
+    stop_motors();
+  }
+  
+  
+  public void strafeRight(int distance)
+  {
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    
+    leftFrontDrive.setTargetPosition(distance);
+    rightFrontDrive.setTargetPosition(-distance);
+    leftRearDrive.setTargetPosition(distance);
+    rightRearDrive.setTargetPosition(-distance);
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    
+    leftFrontDrive.setPower(autonomousPower);
+    leftRearDrive.setPower(autonomousPower);
+    rightFrontDrive.setPower(-autonomousPower);
+    rightRearDrive.setPower(-autonomousPower);
+    while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
     {
       //Do nothing. Allows the motors to spin
     }
@@ -331,28 +400,70 @@ public class MecanumDriveChassis
     leftRearDrive.setPower(0);
   }
   
-  public void strafeLeft(double runDuration)
+  public void turnLeft()
   {
-    runTime.reset();
-    rightFrontDrive.setPower(-1);
-    leftFrontDrive.setPower(-1);
-    rightRearDrive.setPower(1);
-    leftRearDrive.setPower(1);
-    while (runTime.time() < runDuration)
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    
+    leftFrontDrive.setTargetPosition(-720);
+    rightFrontDrive.setTargetPosition(720);
+    leftRearDrive.setTargetPosition(720);
+    rightRearDrive.setTargetPosition(-720);
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    
+    leftFrontDrive.setPower(-autonomousPower);
+    leftRearDrive.setPower(autonomousPower);
+    rightFrontDrive.setPower(autonomousPower);
+    rightRearDrive.setPower(-autonomousPower);
+    while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
     {
       //Do nothing. Allows the motors to spin
     }
     stop_motors();
   }
   
-  public void strafeRight(double runDuration)
+  public void turnRight()
   {
-    runTime.reset();
-    rightFrontDrive.setPower(1);
-    leftFrontDrive.setPower(1);
-    rightRearDrive.setPower(-1);
-    leftRearDrive.setPower(-1);
-    while (runTime.time() < runDuration)
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    
+    leftFrontDrive.setTargetPosition(720);
+    rightFrontDrive.setTargetPosition(-720);
+    leftRearDrive.setTargetPosition(-720);
+    rightRearDrive.setTargetPosition(720);
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    
+    leftFrontDrive.setPower(autonomousPower);
+    leftRearDrive.setPower(-autonomousPower);
+    rightFrontDrive.setPower(-autonomousPower);
+    rightRearDrive.setPower(autonomousPower);
+    while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
     {
       //Do nothing. Allows the motors to spin
     }

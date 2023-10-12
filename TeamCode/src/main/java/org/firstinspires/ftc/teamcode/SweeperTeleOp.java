@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -46,7 +47,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  */
 
 @TeleOp(name = "Sweeper Op Mode 23-24", group = "Robot")
-
+@Disabled
 public class SweeperTeleOp extends LinearOpMode
 {
   
@@ -75,30 +76,30 @@ public class SweeperTeleOp extends LinearOpMode
       if (gamepad1.left_bumper)
       {
         sweeper.sweepIn();
-      }
-      else if (gamepad1.right_bumper)
+      } else if (gamepad1.right_bumper)
       {
         sweeper.sweepOut();
-      }
-      else
+      } else
       {
         sweeper.sweepStop();
       }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75) {
+      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
+      {
         airplane.launch();
       }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.x){
+      if (gamepad1.right_trigger > 0.75 && gamepad1.x)
+      {
         airplane.resetLauncher();
       }
       telemetry.update();
-  
+      
       //telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
       //telemetry.addData("LStickX", gamepad1.left_stick_x);
       //telemetry.addData("vD: ", 1000);
       telemetry.update();
-  
+      
       //driveChassis.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
-        //gamepad1.right_stick_x, gamepad1.left_bumper);
+      //gamepad1.right_stick_x, gamepad1.left_bumper);
       // Pace this loop so jaw action is reasonable speed.
       sleep(50);
     }
