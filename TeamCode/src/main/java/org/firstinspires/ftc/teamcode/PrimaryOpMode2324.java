@@ -56,6 +56,7 @@ public class PrimaryOpMode2324 extends LinearOpMode
   public AirplaneLauncher airplane;
   public MecanumDriveChassis driveChassis;
   public Prop_Sensors prop_sensors;
+  public PixelDropper pixelDropper;
   
   @Override
   public void runOpMode()
@@ -65,6 +66,7 @@ public class PrimaryOpMode2324 extends LinearOpMode
     airplane = new AirplaneLauncher(hardwareMap, telemetry);
     driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     prop_sensors = new Prop_Sensors(hardwareMap, telemetry);
+    pixelDropper = new PixelDropper(hardwareMap, telemetry);
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
     telemetry.update();
     
@@ -77,29 +79,37 @@ public class PrimaryOpMode2324 extends LinearOpMode
       if (gamepad1.left_bumper)
       {
         sweeper.sweepIn();
-      }
-      else if (gamepad1.right_bumper)
+      } else if (gamepad1.right_bumper)
       {
         sweeper.sweepOut();
-      }
-      else
+      } else
       {
         sweeper.sweepStop();
       }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75) {
+      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
+      {
         airplane.launch();
       }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.x){
+      if (gamepad1.right_trigger > 0.75 && gamepad1.x)
+      {
         airplane.resetLauncher();
+      }
+      if (gamepad1.right_bumper && gamepad1.right_trigger > 0.75)
+      {
+        pixelDropper.drop_pixel();
+      }
+      if (gamepad1.left_bumper && gamepad1.left_trigger > 0.75)
+      {
+        pixelDropper.resetDropper();
       }
       prop_sensors.detectProp();
       telemetry.update();
-  
+      
       telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
       telemetry.addData("LStickX", gamepad1.left_stick_x);
       telemetry.addData("vD: ", 1000);
       telemetry.update();
-  
+      
       driveChassis.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
         gamepad1.right_stick_x, gamepad1.left_bumper);
       // Pace this loop so jaw action is reasonable speed.

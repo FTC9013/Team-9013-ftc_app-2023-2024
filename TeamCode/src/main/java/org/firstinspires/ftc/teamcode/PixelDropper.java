@@ -31,6 +31,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -41,6 +42,7 @@ public class PixelDropper
   /* Declare OpMode members. */
   public Servo pixelMotor = null;
   private final Telemetry telemetry;
+  private ElapsedTime runTime = new ElapsedTime();
   
   PixelDropper(HardwareMap hardwareMap, Telemetry theTelemetry)
   {
@@ -48,17 +50,26 @@ public class PixelDropper
     pixelMotor = hardwareMap.get(Servo.class, "PixelDropper");
     
     pixelMotor.setDirection(Servo.Direction.REVERSE);
-    pixelMotor.setPosition(0.5);
+    pixelMotor.setPosition(1);
   }
   
   public void drop_pixel()
   {
-    pixelMotor.setPosition(-1);
+    runTime.reset();
+    pixelMotor.setPosition(0);
+    while (runTime.seconds() < 2)
+    {
+    }
     telemetry.addLine("Dropping Pixel");
   }
+  
   public void resetDropper()
   {
-    pixelMotor.setPosition(0.5);
+    runTime.reset();
+    pixelMotor.setPosition(1);
+    while (runTime.seconds() < 2)
+    {
+    }
     telemetry.addLine("Resetting Servo Position");
   }
 }

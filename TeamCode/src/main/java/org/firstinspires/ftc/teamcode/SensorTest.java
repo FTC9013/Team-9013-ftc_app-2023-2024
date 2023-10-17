@@ -2,9 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-// ticks per centemeter = 17.7914
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autononomous", group = "Linear Opmode")
-public class Autonomous extends LinearOpMode
+
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Sensor Test", group = "Linear Opmode")
+public class SensorTest extends LinearOpMode
 {
   public Prop_Sensors propSensors;
   public PixelDropper pixelDropper;
@@ -27,34 +27,33 @@ public class Autonomous extends LinearOpMode
     // run until the end of the match (driver presses STOP)
     if (opModeIsActive())
     {
-      driveChassis.moveForward(1450);
-      telemetry.addLine("Moved Forward");
+      driveChassis.moveForward(1500);
+      driveChassis.turnRight();
+      driveChassis.turnLeft();
+      
       driveChassis.stop_motors();
       if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
       {
         pixelDropper.drop_pixel();
-        telemetry.addLine("Prop on fronte");
+        telemetry.addLine("Prop on the frontey");
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
       {
         driveChassis.turnLeft();
-        telemetry.addLine("Prop on Lefte");
+        telemetry.addLine("Prop on the Leftey");
         pixelDropper.drop_pixel();
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
       {
         driveChassis.turnRight();
-        driveChassis.moveForward(50);
         pixelDropper.drop_pixel();
-        telemetry.addLine("Prop on the Righty");
+        telemetry.addLine("Prop on the Rightey");
         
       }
-      while (opModeIsActive())
-      {
-      
-      }
-      
       pixelDropper.resetDropper();
       telemetry.update();
-      
+      while (opModeIsActive())
+      {
+        //Do nothing let the loop run
+      }
     }
   }
 }

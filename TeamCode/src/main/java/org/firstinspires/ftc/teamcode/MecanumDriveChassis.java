@@ -11,9 +11,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class MecanumDriveChassis
+
 {
   private ElapsedTime runTime = new ElapsedTime();
   double autonomousPower = 0.5;
+  int turnDistance = 860;
   private final DcMotor leftFrontDrive;
   private final DcMotor leftRearDrive;
   private final DcMotor rightFrontDrive;
@@ -414,10 +416,10 @@ public class MecanumDriveChassis
     rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     
     
-    leftFrontDrive.setTargetPosition(-720);
-    rightFrontDrive.setTargetPosition(720);
-    leftRearDrive.setTargetPosition(720);
-    rightRearDrive.setTargetPosition(-720);
+    leftFrontDrive.setTargetPosition(-turnDistance);
+    rightFrontDrive.setTargetPosition(turnDistance);
+    leftRearDrive.setTargetPosition(turnDistance);
+    rightRearDrive.setTargetPosition(-turnDistance);
     
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -449,10 +451,10 @@ public class MecanumDriveChassis
     rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     
     
-    leftFrontDrive.setTargetPosition(720);
-    rightFrontDrive.setTargetPosition(-720);
-    leftRearDrive.setTargetPosition(-720);
-    rightRearDrive.setTargetPosition(720);
+    leftFrontDrive.setTargetPosition(turnDistance);
+    rightFrontDrive.setTargetPosition(-turnDistance);
+    leftRearDrive.setTargetPosition(-turnDistance);
+    rightRearDrive.setTargetPosition(turnDistance);
     
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
