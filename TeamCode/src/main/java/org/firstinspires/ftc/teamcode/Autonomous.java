@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 // ticks per centemeter = 17.7914
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Autononomous", group = "Linear Opmode")
 public class Autonomous extends LinearOpMode
@@ -27,25 +28,27 @@ public class Autonomous extends LinearOpMode
     // run until the end of the match (driver presses STOP)
     if (opModeIsActive())
     {
-      driveChassis.moveForward(1450);
+      driveChassis.moveForward(83);
       telemetry.addLine("Moved Forward");
+      telemetry.update();
       driveChassis.stop_motors();
       if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
       {
         pixelDropper.drop_pixel();
         telemetry.addLine("Prop on fronte");
+        telemetry.update();
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
       {
         driveChassis.turnLeft();
         telemetry.addLine("Prop on Lefte");
         pixelDropper.drop_pixel();
+        telemetry.update();
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
       {
         driveChassis.turnRight();
-        driveChassis.moveForward(50);
         pixelDropper.drop_pixel();
         telemetry.addLine("Prop on the Righty");
-        
+        telemetry.update();
       }
       while (opModeIsActive())
       {

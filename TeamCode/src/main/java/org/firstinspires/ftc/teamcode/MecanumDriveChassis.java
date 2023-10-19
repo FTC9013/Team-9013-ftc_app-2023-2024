@@ -13,6 +13,7 @@ import java.util.List;
 public class MecanumDriveChassis
 
 {
+  double tickPerCm = 17.7914;
   private ElapsedTime runTime = new ElapsedTime();
   double autonomousPower = 0.5;
   int turnDistance = 860;
@@ -288,8 +289,9 @@ public class MecanumDriveChassis
     rightRearDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
   }
   
-  public void moveForward(int distance)
+  public void moveForward(double distanceCm)
   {
+    
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -301,6 +303,7 @@ public class MecanumDriveChassis
     leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     
+    int distance = (int) (distanceCm * tickPerCm);
     
     leftFrontDrive.setTargetPosition(distance);
     rightFrontDrive.setTargetPosition(distance);
@@ -323,8 +326,9 @@ public class MecanumDriveChassis
     stop_motors();
   }
   
-  public void strafeLeft(int distance)
+  public void strafeLeft(double distanceCm)
   {
+    int distance = (int) (distanceCm * tickPerCm);
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -359,8 +363,9 @@ public class MecanumDriveChassis
   }
   
   
-  public void strafeRight(int distance)
+  public void strafeRight(int distanceCm)
   {
+    int distance = (int) (distanceCm * tickPerCm);
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
