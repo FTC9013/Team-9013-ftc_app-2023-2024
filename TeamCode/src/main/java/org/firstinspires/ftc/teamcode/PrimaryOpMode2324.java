@@ -66,7 +66,7 @@ public class PrimaryOpMode2324 extends LinearOpMode
     airplane = new AirplaneLauncher(hardwareMap, telemetry);
     driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     prop_sensors = new Prop_Sensors(hardwareMap, telemetry);
-    pixelDropper = new PixelDropper(hardwareMap, telemetry);
+    pixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
     telemetry.update();
     
@@ -110,8 +110,8 @@ public class PrimaryOpMode2324 extends LinearOpMode
       telemetry.addData("vD: ", 1000);
       telemetry.update();
       
-      driveChassis.drive(gamepad1.left_stick_y, gamepad1.left_stick_x,
-        gamepad1.right_stick_x, gamepad1.left_bumper);
+      driveChassis.drive(gamepad1.left_stick_y, gamepad1.right_stick_x,
+        gamepad1.left_stick_x, gamepad1.left_bumper);
       // Pace this loop so jaw action is reasonable speed.
       sleep(50);
     }

@@ -14,7 +14,7 @@ public class PixelDropperTest extends LinearOpMode
   @Override
   public void runOpMode()
   {
-    pixelDropper = new PixelDropper(hardwareMap, telemetry);
+    pixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
     telemetry.addData("Status", "Initialized");
     telemetry.update();
     // setup a instance of our drive system
