@@ -32,7 +32,7 @@ public class Autonomous extends LinearOpMode
     
     if (opModeIsActive())
     {
-      driveChassis.moveForward(78);
+      driveChassis.moveForward(83);
       
       telemetry.addLine("Moved Forward");
       telemetry.update();
@@ -40,38 +40,48 @@ public class Autonomous extends LinearOpMode
       driveChassis.stop_motors();
       if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
       {
+        driveChassis.moveBackward(2);
+        driveChassis.strafeLeft(3);
+        driveChassis.moveBackward(2);
         pixelDropperPurple.drop_pixel();
-        telemetry.addLine("Prop on fronte");
+        telemetry.addLine("PROP DETECTION: Front");
         telemetry.update();
+        driveChassis.moveBackward(8);
         driveChassis.turnLeft();
-        driveChassis.moveForward(100);
+        driveChassis.moveForward(103);
+        driveChassis.strafeRight(3);
         pixelDropperYellow.drop_pixel();
         
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
       {
+        driveChassis.strafeRight(3);
         driveChassis.turnLeft();
-        driveChassis.moveForward(10);
+        driveChassis.moveForward(9);
         pixelDropperPurple.drop_pixel();
-        telemetry.addLine("Prop on the Lefte");
+        telemetry.addLine("PROP DETECTION: Left");
         telemetry.update();
         driveChassis.strafeLeft(35);
-        driveChassis.moveForward(90);
-        driveChassis.strafeRight(35);
+        driveChassis.moveForward(97);
+        driveChassis.strafeRight(17);
+        pixelDropperYellow.drop_pixel();
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
       {
+        driveChassis.strafeLeft(2);
         driveChassis.turnRight();
         driveChassis.strafeLeft(10);
-        driveChassis.moveForward(10);
+        driveChassis.moveForward(5);
         pixelDropperPurple.drop_pixel();
-        telemetry.addLine("Prop on the Righty");
+        telemetry.addLine("PROP DETECTION: Right");
         telemetry.update();
-        driveChassis.moveBackward(10);
+        driveChassis.moveBackward(11);
         driveChassis.turnLeft();
         driveChassis.turnLeft();
-        driveChassis.moveForward(103);
+        driveChassis.moveForward(106);
+        driveChassis.strafeRight(6);
+        pixelDropperYellow.drop_pixel();
       } else
       {
-        telemetry.addLine("Prop does not exist, I am too dumb to see anything.");
+        telemetry.addLine("PROP DETECTION: No prop, I'm too dumb.");
         telemetry.update();
       }
       while (opModeIsActive())

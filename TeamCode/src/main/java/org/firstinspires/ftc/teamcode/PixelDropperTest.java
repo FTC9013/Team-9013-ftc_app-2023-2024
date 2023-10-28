@@ -7,14 +7,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class PixelDropperTest extends LinearOpMode
 {
   public Prop_Sensors propSensors;
-  public PixelDropper pixelDropper;
+  public PixelDropper pixelDropperPurple;
+  public PixelDropper pixelDropperYellow;
   private final ElapsedTime runtime = new ElapsedTime();
   
   // a timer for the various automation activities.
   @Override
   public void runOpMode()
   {
-    pixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
+    pixelDropperPurple = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
+    pixelDropperYellow = new PixelDropper(hardwareMap, telemetry, "pixelDropperYellow");
     telemetry.addData("Status", "Initialized");
     telemetry.update();
     // setup a instance of our drive system
@@ -27,11 +29,19 @@ public class PixelDropperTest extends LinearOpMode
     {
       if (gamepad1.right_bumper)
       {
-        pixelDropper.drop_pixel();
+        pixelDropperPurple.drop_pixel();
       }
       if (gamepad1.left_bumper)
       {
-        pixelDropper.resetDropper();
+        pixelDropperPurple.resetDropper();
+      }
+      if (gamepad1.left_bumper && gamepad1.left_trigger > 0.75)
+      {
+        pixelDropperYellow.drop_pixel();
+      }
+      if (gamepad1.right_bumper && gamepad1.right_trigger > 0.75)
+      {
+        pixelDropperYellow.drop_pixel();
       }
       telemetry.update();
     }

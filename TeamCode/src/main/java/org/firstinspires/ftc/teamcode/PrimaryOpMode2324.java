@@ -104,7 +104,6 @@ public class PrimaryOpMode2324 extends LinearOpMode
       }
       prop_sensors.detectProp();
       telemetry.update();
-      
       telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
       telemetry.addData("LStickX", gamepad1.left_stick_x);
       telemetry.addData("vD: ", 1000);
