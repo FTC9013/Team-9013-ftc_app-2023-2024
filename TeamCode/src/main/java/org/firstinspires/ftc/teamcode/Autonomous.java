@@ -38,21 +38,21 @@ public class Autonomous extends LinearOpMode
       telemetry.update();
       
       driveChassis.stop_motors();
-      if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
+      if (propSensors.detectProp() == Prop_Sensors.PropSide.No)
       {
-        driveChassis.moveBackward(2);
-        driveChassis.strafeLeft(3);
-        driveChassis.moveBackward(2);
-        pixelDropperPurple.drop_pixel();
-        telemetry.addLine("PROP DETECTION: Front");
+        telemetry.addLine("Prop aint found so we goin backward");
         telemetry.update();
-        driveChassis.moveBackward(8);
-        driveChassis.turnLeft();
-        driveChassis.moveForward(103);
-        driveChassis.strafeRight(3);
-        pixelDropperYellow.drop_pixel();
+        driveChassis.moveBackward(3);
         
-      } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
+      }
+      if (propSensors.detectProp() == Prop_Sensors.PropSide.No)
+      {
+        driveChassis.moveBackward(6);
+        
+        
+      }
+      
+      if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
       {
         driveChassis.strafeRight(3);
         driveChassis.turnLeft();
@@ -60,15 +60,15 @@ public class Autonomous extends LinearOpMode
         pixelDropperPurple.drop_pixel();
         telemetry.addLine("PROP DETECTION: Left");
         telemetry.update();
-        driveChassis.strafeLeft(35);
-        driveChassis.moveForward(97);
+        driveChassis.strafeLeft(38);
+        driveChassis.moveForward(92);
         driveChassis.strafeRight(17);
         pixelDropperYellow.drop_pixel();
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
       {
         driveChassis.strafeLeft(2);
         driveChassis.turnRight();
-        driveChassis.strafeLeft(10);
+        driveChassis.strafeLeft(15);
         driveChassis.moveForward(5);
         pixelDropperPurple.drop_pixel();
         telemetry.addLine("PROP DETECTION: Right");
@@ -76,13 +76,25 @@ public class Autonomous extends LinearOpMode
         driveChassis.moveBackward(11);
         driveChassis.turnLeft();
         driveChassis.turnLeft();
-        driveChassis.moveForward(106);
+        driveChassis.moveForward(94);
         driveChassis.strafeRight(6);
         pixelDropperYellow.drop_pixel();
       } else
       {
-        telemetry.addLine("PROP DETECTION: No prop, I'm too dumb.");
+        telemetry.addLine("No. Just no.");
         telemetry.update();
+        driveChassis.moveBackward(2);
+        driveChassis.strafeLeft(3);
+        driveChassis.moveBackward(2);
+        driveChassis.strafeLeft(6);
+        pixelDropperPurple.drop_pixel();
+        telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
+        telemetry.update();
+        driveChassis.moveBackward(8);
+        driveChassis.turnLeft();
+        driveChassis.moveForward(92);
+        driveChassis.strafeRight(7);
+        pixelDropperYellow.drop_pixel();
       }
       while (opModeIsActive())
       {
@@ -95,3 +107,4 @@ public class Autonomous extends LinearOpMode
     }
   }
 }
+//Logan wuz heres ooh hee hee hoo hoo haa haa
