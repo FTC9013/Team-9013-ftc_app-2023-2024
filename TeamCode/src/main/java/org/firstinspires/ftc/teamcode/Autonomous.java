@@ -32,43 +32,45 @@ public class Autonomous extends LinearOpMode
     
     if (opModeIsActive())
     {
-      driveChassis.moveForward(83);
+      driveChassis.moveForward(70);
+      Prop_Sensors.PropSide propLocation = Prop_Sensors.PropSide.No;
+      driveChassis.startMovingForward(18);
+      while (driveChassis.stillMoving())
+      {
+        if (propLocation == Prop_Sensors.PropSide.No)
+        {
+          propLocation = propSensors.detectProp();
+          telemetry.addLine("neo pruaup fuaund yeat");
+        } else
+        {
+          telemetry.addData("proop finded", propLocation);
+        }
+        telemetry.update();
+      }
+      driveChassis.stop_motors();
       
       telemetry.addLine("Moved Forward");
       telemetry.update();
       
-      driveChassis.stop_motors();
-      if (propSensors.detectProp() == Prop_Sensors.PropSide.No)
-      {
-        telemetry.addLine("Prop aint found so we goin backward");
-        telemetry.update();
-        driveChassis.moveBackward(3);
-        
-      }
-      if (propSensors.detectProp() == Prop_Sensors.PropSide.No)
-      {
-        driveChassis.moveBackward(6);
-        
-        
-      }
       
-      if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
+      if (propLocation == Prop_Sensors.PropSide.Left)
       {
-        driveChassis.strafeRight(3);
         driveChassis.turnLeft();
         driveChassis.moveForward(9);
+        driveChassis.strafeLeft(8);
         pixelDropperPurple.drop_pixel();
-        telemetry.addLine("PROP DETECTION: Left");
+        telemetry.addLine("PROP DETECTION: Lefte");
         telemetry.update();
         driveChassis.strafeLeft(38);
-        driveChassis.moveForward(92);
+        driveChassis.moveForward(88);
         driveChassis.strafeRight(17);
         pixelDropperYellow.drop_pixel();
-      } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
+        driveChassis.strafeLeft(65);
+      } else if (propLocation == Prop_Sensors.PropSide.Right)
       {
         driveChassis.strafeLeft(2);
         driveChassis.turnRight();
-        driveChassis.strafeLeft(15);
+        driveChassis.strafeLeft(8);
         driveChassis.moveForward(5);
         pixelDropperPurple.drop_pixel();
         telemetry.addLine("PROP DETECTION: Right");
@@ -76,14 +78,15 @@ public class Autonomous extends LinearOpMode
         driveChassis.moveBackward(11);
         driveChassis.turnLeft();
         driveChassis.turnLeft();
-        driveChassis.moveForward(94);
+        driveChassis.moveForward(90);
         driveChassis.strafeRight(6);
         pixelDropperYellow.drop_pixel();
+        driveChassis.strafeLeft(90);
       } else
       {
-        telemetry.addLine("No. Just no.");
+        telemetry.addLine("fooooorrrrwwwwaaaaaaarrrd");
         telemetry.update();
-        driveChassis.moveBackward(2);
+        driveChassis.moveBackward(5);
         driveChassis.strafeLeft(3);
         driveChassis.moveBackward(2);
         driveChassis.strafeLeft(6);
@@ -92,9 +95,9 @@ public class Autonomous extends LinearOpMode
         telemetry.update();
         driveChassis.moveBackward(8);
         driveChassis.turnLeft();
-        driveChassis.moveForward(92);
-        driveChassis.strafeRight(7);
+        driveChassis.moveForward(88);
         pixelDropperYellow.drop_pixel();
+        driveChassis.strafeLeft(73);
       }
       while (opModeIsActive())
       {
