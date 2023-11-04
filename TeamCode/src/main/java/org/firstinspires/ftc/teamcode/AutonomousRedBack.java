@@ -21,11 +21,13 @@ public class AutonomousRedBack extends Autonomous
     telemetry.addLine("PROP DETECTION: Right");
     telemetry.update();
     driveChassis.moveBackward(11);
-    driveChassis.strafeRight(30);
-    driveChassis.moveForward(88);
-    driveChassis.strafeRight(20);
+    driveChassis.strafeRight(60);
+    
+    driveChassis.moveForward(98);
+    driveChassis.strafeLeft(20);
+    
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeRight(65);
+    driveChassis.strafeRight(45);
   }
   
   public void goLeft()
