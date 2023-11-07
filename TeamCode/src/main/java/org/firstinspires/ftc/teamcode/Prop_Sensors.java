@@ -74,6 +74,7 @@ public class Prop_Sensors
   NormalizedColorSensor frontSensor;
   NormalizedColorSensor rightSensor;
   NormalizedColorSensor leftSensor;
+  double distanceThingy = 4;
   
   /** The relativeLayout field is used to aid in providing interesting visual feedback
    * in this sample application; you probably *don't* need this when you use a color sensor on your
@@ -160,7 +161,7 @@ public class Prop_Sensors
     if (frontSensor instanceof DistanceSensor)
     {
       telemetry.addData("Port 0, Front Sensor | Distance (cm)", "%.3f", ((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM));
-      if (((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM) < 3.5)
+      if (((DistanceSensor) frontSensor).getDistance(DistanceUnit.CM) < distanceThingy)
       {
         telemetry.addLine("It on de front");
         return PropSide.Front;
@@ -170,7 +171,7 @@ public class Prop_Sensors
     if (leftSensor instanceof DistanceSensor)
     {
       telemetry.addData("Port 1, Left Sensor | Distance (cm)", "%.3f", ((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM));
-      if (((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM) < 3.5)
+      if (((DistanceSensor) leftSensor).getDistance(DistanceUnit.CM) < distanceThingy)
       {
         telemetry.addLine("It on de lefte");
         return PropSide.Left;
@@ -180,7 +181,7 @@ public class Prop_Sensors
     if (rightSensor instanceof DistanceSensor)
     {
       telemetry.addData("Port 2, Right Sensor | Distance (cm)", "%.3f", ((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM));
-      if (((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM) < 3.5)
+      if (((DistanceSensor) rightSensor).getDistance(DistanceUnit.CM) < distanceThingy)
       {
         telemetry.addLine("It on de rite");
         return PropSide.Right;

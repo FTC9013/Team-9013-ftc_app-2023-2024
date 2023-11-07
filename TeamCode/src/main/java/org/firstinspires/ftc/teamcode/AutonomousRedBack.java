@@ -11,20 +11,20 @@ public class AutonomousRedBack extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.turnRight();
-    driveChassis.moveForward(98);
+    driveChassis.moveForward(102);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeRight(73);
+    driveChassis.strafeRight(102);
   }
   
   public void goRight()
   {
     telemetry.addLine("PROP DETECTION: Right");
     telemetry.update();
-    driveChassis.moveBackward(11);
+    driveChassis.moveBackward(8);
     driveChassis.strafeRight(60);
     
-    driveChassis.moveForward(98);
-    driveChassis.strafeLeft(20);
+    driveChassis.moveForward(102);
+    driveChassis.strafeLeft(18);
     
     pixelDropperYellow.drop_pixel();
     driveChassis.strafeRight(45);
@@ -37,12 +37,14 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.turnRight();
     driveChassis.turnRight();
-    driveChassis.moveForward(87);
-    driveChassis.strafeLeft(40);
+    driveChassis.moveForward(90);
+    driveChassis.strafeLeft(7);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeRight(105);
+    driveChassis.strafeRight(75);
   }
   
   
 }
-  
+  //ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
+  //ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
+  //ooh eee ooh ahh ahh, ching chang, walla walla bing bang...

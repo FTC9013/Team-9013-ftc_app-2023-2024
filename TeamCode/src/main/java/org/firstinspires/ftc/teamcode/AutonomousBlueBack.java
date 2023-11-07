@@ -34,12 +34,11 @@ public class AutonomousBlueBack extends Autonomous
     telemetry.addLine("PROP DETECTION: Lefte");
     telemetry.update();
     driveChassis.strafeLeft(38);
-    driveChassis.moveForward(88);
+    driveChassis.moveForward(95);
     driveChassis.strafeRight(17);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(65);
+    driveChassis.strafeLeft(56);
   }
   
   
 }
-  

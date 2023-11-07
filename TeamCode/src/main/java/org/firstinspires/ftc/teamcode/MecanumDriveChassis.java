@@ -15,7 +15,7 @@ public class MecanumDriveChassis
 {
   double tickPerCm = 17.7914;
   private ElapsedTime runTime = new ElapsedTime();
-  double autonomousPower = 0.5;
+  double autonomousPower = 0.4;
   int turnDistance = 860;
   private final DcMotor leftFrontDrive;
   private final DcMotor leftRearDrive;
@@ -294,44 +294,46 @@ public class MecanumDriveChassis
     startMovingForward(distanceCm);
     while (stillMoving())
     {
-    
+      
       //Do nothing. Allows the motors to spin
     }
     stop_motors();
   }
+  
   public void startMovingForward(double distanceCm)
   {
-  
+    
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-  
-  
+    
+    
     leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-  
+    
     int distance = (int) (distanceCm * tickPerCm);
-  
+    
     leftFrontDrive.setTargetPosition(distance);
     rightFrontDrive.setTargetPosition(distance);
     leftRearDrive.setTargetPosition(distance);
     rightRearDrive.setTargetPosition(distance);
-  
+    
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-  
+    
     leftFrontDrive.setPower(autonomousPower);
     leftRearDrive.setPower(autonomousPower);
     rightFrontDrive.setPower(autonomousPower);
     rightRearDrive.setPower(autonomousPower);
   }
   
-  public boolean stillMoving(){
+  public boolean stillMoving()
+  {
     return leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy();
     
   }

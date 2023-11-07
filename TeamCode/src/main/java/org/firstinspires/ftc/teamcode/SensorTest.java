@@ -25,35 +25,26 @@ public class SensorTest extends LinearOpMode
     waitForStart();
     runtime.reset();
     // run until the end of the match (driver presses STOP)
-    if (opModeIsActive())
+    while (opModeIsActive())
     {
-      driveChassis.moveForward(1500);
-      driveChassis.turnRight();
-      driveChassis.turnLeft();
       
-      driveChassis.stop_motors();
       if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
       {
-        pixelDropper.drop_pixel();
+        
         telemetry.addLine("Prop on the frontey");
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
       {
-        driveChassis.turnLeft();
         telemetry.addLine("Prop on the Leftey");
-        pixelDropper.drop_pixel();
+        
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
       {
-        driveChassis.turnRight();
-        pixelDropper.drop_pixel();
+        
         telemetry.addLine("Prop on the Rightey");
         
       }
-      pixelDropper.resetDropper();
+      
       telemetry.update();
-      while (opModeIsActive())
-      {
-        //Do nothing let the loop run
-      }
+      
     }
   }
 }
