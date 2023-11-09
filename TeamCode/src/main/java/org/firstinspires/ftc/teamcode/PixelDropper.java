@@ -44,10 +44,10 @@ public class PixelDropper
   private final Telemetry telemetry;
   private ElapsedTime runTime = new ElapsedTime();
   
-  PixelDropper(HardwareMap hardwareMap, Telemetry theTelemetry, String dropper1)
+  PixelDropper(HardwareMap hardwareMap, Telemetry theTelemetry, String dropperType)
   {
     telemetry = theTelemetry;
-    pixelMotor = hardwareMap.get(Servo.class, dropper1);
+    pixelMotor = hardwareMap.get(Servo.class, dropperType);
     
     pixelMotor.setDirection(Servo.Direction.REVERSE);
     pixelMotor.setPosition(1);

@@ -29,8 +29,6 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -48,12 +46,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-public class Sweeper
+public class MastArm
 {
   public DcMotor driveMotor = null;
   private final Telemetry telemetry;
   
-  Sweeper(HardwareMap hardwareMap, Telemetry theTelemetry)
+  MastArm(HardwareMap hardwareMap, Telemetry theTelemetry)
   {
     
     telemetry = theTelemetry;
@@ -61,7 +59,7 @@ public class Sweeper
     
     
     // Define and Initialize Motors
-    driveMotor = hardwareMap.get(DcMotor.class, "sweeper_motor");
+    driveMotor = hardwareMap.get(DcMotor.class, "arm");
     
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
     // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
@@ -70,19 +68,19 @@ public class Sweeper
     
   }
   
-  public void sweepIn()
+  public void mastUp()
   {
     driveMotor.setPower(1);
-    telemetry.addLine("Sweeping In");
+    telemetry.addLine("Pulling up");
   }
   
-  public void sweepOut()
+  public void mastDown()
   {
     driveMotor.setPower(-1);
-    telemetry.addLine("Sweeping Out");
+    telemetry.addLine("Pulling down");
   }
   
-  public void sweepStop()
+  public void mastStop()
   {
     driveMotor.setPower(0);
   }

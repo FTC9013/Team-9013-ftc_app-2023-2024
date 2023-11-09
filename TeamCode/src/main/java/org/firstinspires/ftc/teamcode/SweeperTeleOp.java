@@ -53,15 +53,12 @@ public class SweeperTeleOp extends LinearOpMode
   
   /* Declare OpMode members. */
   public DcMotor driveMotor = null;
-  public Sweeper sweeper;
   public AirplaneLauncher airplane;
   //public MecanumDriveChassis driveChassis;
   
   @Override
   public void runOpMode()
   {
-    
-    sweeper = new Sweeper(hardwareMap, telemetry);
     airplane = new AirplaneLauncher(hardwareMap, telemetry);
     //driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
@@ -73,16 +70,6 @@ public class SweeperTeleOp extends LinearOpMode
     // run until the end of the match (driver presses STOP)
     while (opModeIsActive())
     {
-      if (gamepad1.left_bumper)
-      {
-        sweeper.sweepIn();
-      } else if (gamepad1.right_bumper)
-      {
-        sweeper.sweepOut();
-      } else
-      {
-        sweeper.sweepStop();
-      }
       if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
       {
         airplane.launch();

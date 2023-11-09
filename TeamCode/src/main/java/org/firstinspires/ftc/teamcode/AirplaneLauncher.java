@@ -47,19 +47,18 @@ public class AirplaneLauncher
     telemetry = theTelemetry;
     airplaneMotor = hardwareMap.get(Servo.class, "RocketLauncher");
     
-    airplaneMotor.setDirection(Servo.Direction.REVERSE);
-    airplaneMotor.setPosition(0.5);
+    airplaneMotor.setPosition(-1);
   }
   
   public void launch()
   {
-    airplaneMotor.setPosition(-1);
+    airplaneMotor.setPosition(1);
     telemetry.addLine("Launching Airplane");
   }
   
   public void resetLauncher()
   {
-    airplaneMotor.setPosition(0.5);
+    airplaneMotor.setPosition(-1);
     telemetry.addLine("Resetting Servo Position");
   }
 }
