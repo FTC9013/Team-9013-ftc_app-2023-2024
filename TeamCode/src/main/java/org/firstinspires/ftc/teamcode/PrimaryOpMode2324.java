@@ -85,15 +85,15 @@ public class PrimaryOpMode2324 extends LinearOpMode
       {
         airplane.resetLauncher();
       }
-      if (gamepad2.right_bumper && gamepad2.right_trigger > 0.75)
+      if (gamepad1.right_bumper && gamepad1.right_trigger > 0.75)
       {
         purplePixelDropper.drop_pixel();
       }
-      if (gamepad2.left_bumper && gamepad2.left_trigger > 0.75)
+      if (gamepad1.left_bumper && gamepad1.left_trigger > 0.75)
       {
         yellowPixelDropper.drop_pixel();
       }
-      if (gamepad2.dpad_up)
+      /*if (gamepad2.dpad_up)
       {
         armMotor.mastUp();
       } else if (gamepad2.dpad_down)
@@ -102,9 +102,8 @@ public class PrimaryOpMode2324 extends LinearOpMode
       } else
       {
         armMotor.mastStop();
-      }
+      }*/
       
-      prop_sensors.detectProp();
       telemetry.update();
       telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
       telemetry.addData("LStickX", gamepad1.left_stick_x);
@@ -118,3 +117,7 @@ public class PrimaryOpMode2324 extends LinearOpMode
     }
   }
 }
+/*
+One Gamepad Controls:
+
+ */

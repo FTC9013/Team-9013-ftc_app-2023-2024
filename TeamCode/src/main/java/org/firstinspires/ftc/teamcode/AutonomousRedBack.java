@@ -1,19 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
-// ticks per centemeter = 17.7914
+// tICKs per centimeter = 17.7914
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Red Back")
 public class AutonomousRedBack extends Autonomous
 {
   
   public void goCenter()
   {
-    telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
+    telemetry.addLine("PROP DETECTION: Its no left or right so its forward");
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.turnRight();
     driveChassis.moveForward(102);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeRight(102);
+    driveChassis.strafeRight(85);
   }
   
   public void goRight()
@@ -45,6 +45,6 @@ public class AutonomousRedBack extends Autonomous
   
   
 }
-  //ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
-  //ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
-  //ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
+//ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
+//ooh eee ooh ahh ahh, ching chang, walla walla bing bang...
+//ooh eee ooh ahh ahh, ching chang, walla walla bing bang...

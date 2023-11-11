@@ -37,7 +37,7 @@ public abstract class Autonomous extends LinearOpMode
     
     if (opModeIsActive())
     {
-      driveChassis.moveForward(70);
+      driveChassis.moveForward(68);
       Prop_Sensors.PropSide propLocation = Prop_Sensors.PropSide.No;
       driveChassis.startMovingForward(20);
       while (driveChassis.stillMoving())
@@ -52,6 +52,7 @@ public abstract class Autonomous extends LinearOpMode
         }
         telemetry.update();
       }
+      
       driveChassis.stop_motors();
       
       telemetry.addLine("Moved Forward");
