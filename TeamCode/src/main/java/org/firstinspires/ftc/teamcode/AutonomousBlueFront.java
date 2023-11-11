@@ -7,6 +7,7 @@ public class AutonomousBlueFront extends Autonomous
   
   public void goCenter()
   {
+    driveChassis.moveForward(2);
     telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
     telemetry.update();
     
