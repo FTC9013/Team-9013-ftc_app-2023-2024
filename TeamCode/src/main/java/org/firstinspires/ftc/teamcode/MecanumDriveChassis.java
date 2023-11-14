@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,10 +17,14 @@ import java.util.List;
 public class MecanumDriveChassis
 
 {
+  IMU imu;
+  
+  
   double tickPerCm = 17.7914;
   private ElapsedTime runTime = new ElapsedTime();
   double autonomousPower = 0.4;
   int turnDistance = 860;
+  int turnDistanceYaw = 880;
   private final DcMotor leftFrontDrive;
   private final DcMotor leftRearDrive;
   private final DcMotor rightFrontDrive;
@@ -52,6 +60,22 @@ public class MecanumDriveChassis
     // Initialize the hardware variables. Note that the strings used here as parameters
     // to 'get' must correspond to the names assigned during the robot configuration
     // step (using the FTC Robot Controller app on the phone).
+    
+    imu = hardwareMap.get(IMU.class, "imu");
+    
+    RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.UP;
+    RevHubOrientationOnRobot.UsbFacingDirection usbDirection = RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+    
+    RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
+    
+    // Now initialize the IMU with this mounting orientation
+    // Note: if you choose two conflicting directions, this initialization will cause a code exception.
+    imu.initialize(new IMU.Parameters(orientationOnRobot));
+    imu.resetYaw();
+    
+    YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+    orientation.getYaw(AngleUnit.DEGREES);
+    
     leftFrontDrive = hardwareMap.get(DcMotor.class, "lFront");
     leftRearDrive = hardwareMap.get(DcMotor.class, "lRear");
     rightFrontDrive = hardwareMap.get(DcMotor.class, "rFront");
@@ -521,6 +545,48 @@ public class MecanumDriveChassis
     rightRearDrive.setPower(autonomousPower);
     while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
     {
+      //Do nothing. Allows the motors to spin
+    }
+    stop_motors();
+  }
+  
+  public void faceLeft()
+  {
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightFrontDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    leftRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    rightRearDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    
+    
+    leftFrontDrive.setTargetPosition(-turnDistanceYaw);
+    rightFrontDrive.setTargetPosition(turnDistanceYaw);
+    leftRearDrive.setTargetPosition(turnDistanceYaw);
+    rightRearDrive.setTargetPosition(-turnDistanceYaw);
+    
+    leftFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    
+    leftFrontDrive.setPower(-autonomousPower);
+    leftRearDrive.setPower(autonomousPower);
+    rightFrontDrive.setPower(autonomousPower);
+    rightRearDrive.setPower(-autonomousPower);
+    while (leftFrontDrive.isBusy() && rightFrontDrive.isBusy() && leftRearDrive.isBusy() && rightRearDrive.isBusy())
+    {
+      YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+      double yaw = orientation.getYaw(AngleUnit.DEGREES);
+      telemetry.addData("Yaw is", yaw);
+      telemetry.update();
+      if (yaw < 91 && yaw > 89) {
+        break;
+      }
       //Do nothing. Allows the motors to spin
     }
     stop_motors();
