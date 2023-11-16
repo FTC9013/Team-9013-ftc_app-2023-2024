@@ -584,7 +584,8 @@ public class MecanumDriveChassis
       double yaw = orientation.getYaw(AngleUnit.DEGREES);
       telemetry.addData("Yaw is", yaw);
       telemetry.update();
-      if (yaw < 91 && yaw > 89) {
+      if (yaw < 91 && yaw > 89)
+      {
         break;
       }
       //Do nothing. Allows the motors to spin

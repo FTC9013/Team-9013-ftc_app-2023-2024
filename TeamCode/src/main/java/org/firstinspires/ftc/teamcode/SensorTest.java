@@ -11,9 +11,11 @@ public class SensorTest extends LinearOpMode
   private final ElapsedTime runtime = new ElapsedTime();
   
   // a timer for the various automation activities.
+  
   @Override
   public void runOpMode()
   {
+    
     propSensors = new Prop_Sensors(hardwareMap, telemetry);
     pixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
     telemetry.addData("Status", "Initialized");
@@ -25,15 +27,18 @@ public class SensorTest extends LinearOpMode
     waitForStart();
     runtime.reset();
     // run until the end of the match (driver presses STOP)
+    driveChassis.turnLeft();
+    /*
     while (opModeIsActive())
     {
-      
+      driveChassis.turnLeft();
       if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
       {
         
         telemetry.addLine("Prop on the frontey");
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
       {
+        driveChassis.faceLeft();
         telemetry.addLine("Prop on the Leftey");
         
       } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
@@ -46,5 +51,7 @@ public class SensorTest extends LinearOpMode
       telemetry.update();
       
     }
+    
+     */
   }
 }
