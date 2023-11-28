@@ -52,22 +52,24 @@ public class PrimaryOpMode2324 extends LinearOpMode
   
   /* Declare OpMode members. */
   public DcMotor driveMotor = null;
-  public MastArm armMotor;
+  public MastArm mast;
   public AirplaneLauncher airplane;
   public MecanumDriveChassis driveChassis;
   public Prop_Sensors prop_sensors;
   public PixelDropper purplePixelDropper;
   public PixelDropper yellowPixelDropper;
+  public ArmControl arm;
   
   @Override
   public void runOpMode()
   {
-    armMotor = new MastArm(hardwareMap, telemetry);
+    mast = new MastArm(hardwareMap, telemetry);
     airplane = new AirplaneLauncher(hardwareMap, telemetry);
     driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     prop_sensors = new Prop_Sensors(hardwareMap, telemetry);
     purplePixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
     yellowPixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperYellow");
+    arm = new ArmControl(hardwareMap, telemetry);
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
     telemetry.update();
     
@@ -77,11 +79,11 @@ public class PrimaryOpMode2324 extends LinearOpMode
     // run until the end of the match (driver presses STOP)
     while (opModeIsActive())
     {
-      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
+      if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75)
       {
         airplane.launch();
       }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.x)
+      if (gamepad2.right_trigger > 0.75 && gamepad2.x)
       {
         airplane.resetLauncher();
       }
@@ -93,17 +95,30 @@ public class PrimaryOpMode2324 extends LinearOpMode
       {
         yellowPixelDropper.drop_pixel();
       }
-      /*if (gamepad2.dpad_up)
+      if (gamepad2.dpad_up)
       {
-        armMotor.mastUp();
+        mast.mastUp();
       } else if (gamepad2.dpad_down)
       {
-        armMotor.mastDown();
+        mast.mastDown();
       } else
       {
-        armMotor.mastStop();
-      }*/
-      
+        mast.mastStop();
+      }
+      if (gamepad2.left_stick_y > 0.75)
+      {
+        arm.raise();
+      } else if (gamepad2.left_stick_y < -0.75)
+      {
+        arm.lower();
+      } else
+      {
+        arm.stop();
+      }
+      if (gamepad2.a)
+      {
+        arm.toggleGripper();
+      }
       telemetry.update();
       telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
       telemetry.addData("LStickX", gamepad1.left_stick_x);

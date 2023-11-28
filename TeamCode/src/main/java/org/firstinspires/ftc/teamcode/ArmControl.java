@@ -52,6 +52,11 @@ public class ArmControl
     telemetry.addData("Limit Switch?", limitSwitch.isPressed() ? "Pressed" : "Not Pressed");
     armMotor.setPower(0);
   }
+  
+  public void toggleGripper()
+  {
+  
+  }
 }
 
 

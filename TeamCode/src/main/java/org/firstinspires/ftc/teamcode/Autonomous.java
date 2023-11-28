@@ -73,10 +73,8 @@ public abstract class Autonomous extends LinearOpMode
       {
         telemetry.addLine("fooooorrrrwwwwaaaaaaarrrd");
         telemetry.update();
-        driveChassis.moveBackward(7);
-        driveChassis.strafeLeft(3);
-        driveChassis.moveBackward(2);
-        driveChassis.strafeLeft(6);
+        driveChassis.moveBackward(9);
+        driveChassis.strafeLeft(9);
         pixelDropperPurple.drop_pixel();
         telemetry.addLine("PROP DETECTION: Front");
         telemetry.update();
