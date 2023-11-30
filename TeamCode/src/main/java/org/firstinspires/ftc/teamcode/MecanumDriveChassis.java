@@ -326,6 +326,11 @@ public class MecanumDriveChassis
   
   public void startMovingForward(double distanceCm)
   {
+    startMovingForward(distanceCm, autonomousPower);
+  }
+  
+  public void startMovingForward(double distanceCm, double power)
+  {
     
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

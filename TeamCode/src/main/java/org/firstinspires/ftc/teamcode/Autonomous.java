@@ -37,7 +37,7 @@ public abstract class Autonomous extends LinearOpMode
     
     if (opModeIsActive())
     {
-      driveChassis.moveForward(68);
+      driveChassis.moveForward(65);
       Prop_Sensors.PropSide propLocation = Prop_Sensors.PropSide.No;
       driveChassis.startMovingForward(20);
       while (driveChassis.stillMoving())
@@ -64,7 +64,7 @@ public abstract class Autonomous extends LinearOpMode
         driveChassis.strafeLeft(2);
         driveChassis.turnRight();
         driveChassis.strafeLeft(6);
-        
+        driveChassis.moveForward(2);
         pixelDropperPurple.drop_pixel();
         telemetry.addLine("Going right");
         telemetry.update();
@@ -82,7 +82,7 @@ public abstract class Autonomous extends LinearOpMode
       } else
       {
         driveChassis.turnLeft();
-        driveChassis.moveForward(2);
+        driveChassis.moveForward(5);
         driveChassis.strafeLeft(8);
         pixelDropperPurple.drop_pixel();
         goLeft();
@@ -94,8 +94,27 @@ public abstract class Autonomous extends LinearOpMode
       }
       
       
-      telemetry.update();
+      //telemetry.update();
       
     }
   }
+  
+  public void goTill(double maxDist, double stopAt)
+  {
+    driveChassis.startMovingForward(maxDist, 0.2);
+    while (driveChassis.stillMoving())
+    {
+      telemetry.addData("Front sensor distance is", propSensors.frontDistance());
+      if (propSensors.frontDistance() < stopAt)
+      {
+        telemetry.addLine("We stopin");
+        telemetry.update();
+        break;
+      }
+      telemetry.update();
+    }
+    driveChassis.stop_motors();
+  }
+  
+  
 }

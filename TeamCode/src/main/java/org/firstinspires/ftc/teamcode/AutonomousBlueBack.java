@@ -11,9 +11,9 @@ public class AutonomousBlueBack extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.turnLeft();
-    driveChassis.moveForward(95);
+    goTill(100, 15);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(73);
+    driveChassis.strafeRight(60);
   }
   
   public void goRight()
@@ -23,10 +23,10 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.turnLeft();
     driveChassis.turnLeft();
-    driveChassis.moveForward(90);
+    goTill(95, 15);
     
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(100);
+    driveChassis.strafeRight(45);
   }
   
   public void goLeft()
@@ -34,10 +34,11 @@ public class AutonomousBlueBack extends Autonomous
     telemetry.addLine("PROP DETECTION: Lefte");
     telemetry.update();
     driveChassis.strafeLeft(38);
-    driveChassis.moveForward(102);
+    driveChassis.moveForward(50);
     driveChassis.strafeRight(17);
+    goTill(55, 15);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(56);
+    driveChassis.strafeRight(75);
   }
   
   

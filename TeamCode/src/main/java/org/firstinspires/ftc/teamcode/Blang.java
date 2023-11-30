@@ -30,41 +30,19 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 
 import java.util.concurrent.TimeUnit;
 
-/*
- * This OpMode demonstrates use of the REV Robotics Blinkin LED Driver.
- * AUTO mode cycles through all of the patterns.
- * MANUAL mode allows the user to manually change patterns using the
- * left and right bumpers of a gamepad.
- *
- * Configure the driver on a servo port, and name it "blinkin".
- *
- * Displays the first pattern upon init.
- */
-@TeleOp(name = "BlinkinExample")
 
-public class Blang extends OpMode
+public class Blang
 {
   
-  /*
-   * Change the pattern every 10 seconds in AUTO mode.
-   */
-  private final static int LED_PERIOD = 10;
-  
-  /*
-   * Rate limit gamepad button presses to every 500ms.
-   */
-  private final static int GAMEPAD_LOCKOUT = 500;
   
   RevBlinkinLedDriver blinkinLedDriver;
-  RevBlinkinLedDriver.BlinkinPattern pattern;
+  
   
   Telemetry.Item patternName;
   Telemetry.Item display;

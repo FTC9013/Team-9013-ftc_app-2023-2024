@@ -2,14 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ArmControl
 {
   private final DcMotor armMotor;
-  private final TouchSensor limitSwitch;
+  //private final TouchSensor limitSwitch;
   private final Telemetry telemetry;
   
   
@@ -18,7 +17,7 @@ public class ArmControl
     telemetry = theTelemetry;
     // Initialize the hardware variables
     armMotor = hardwareMap.get(DcMotor.class, "arm");
-    limitSwitch = hardwareMap.get(TouchSensor.class, "limitSwitch");
+    //limitSwitch = hardwareMap.get(TouchSensor.class, "limitSwitch");
     armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     // Motors on one side reversed to drive forward
     // Reverse the motor that runs backwards when connected directly to the battery
@@ -29,15 +28,10 @@ public class ArmControl
   
   public void lower()
   {
-    if (limitSwitch.isPressed())
-    {
-      armMotor.setPower(0);
-      telemetry.addData("Limit Switch is Pressed", "true");
-    } else
-    {
-      armMotor.setPower(-0.6);
-      telemetry.addData("Lowering", "True");
-    }
+    
+    armMotor.setPower(-0.6);
+    telemetry.addData("Limit Switch is Pressed", "true");
+    
   }
   
   public void raise()
@@ -49,7 +43,7 @@ public class ArmControl
   public void stop()
   {
     
-    telemetry.addData("Limit Switch?", limitSwitch.isPressed() ? "Pressed" : "Not Pressed");
+    //telemetry.addData("Limit Switch?", limitSwitch.isPressed() ? "Pressed" : "Not Pressed");
     armMotor.setPower(0);
   }
   
