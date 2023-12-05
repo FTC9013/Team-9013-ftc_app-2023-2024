@@ -105,13 +105,13 @@ public abstract class Autonomous extends LinearOpMode
     }
   }
   
-  public void goTill(double maxDist, double stopAt)
+  public void goBackboard(double failSafe)
   {
-    driveChassis.startMovingForward(maxDist, 0.2);
+    driveChassis.startMovingForward(failSafe, 0.2);
     while (driveChassis.stillMoving())
     {
       telemetry.addData("Front sensor distance is", propSensors.frontDistance());
-      if (propSensors.frontDistance() < stopAt)
+      if (propSensors.frontDistance() < 30)
       {
         telemetry.addLine("We stopin");
         telemetry.update();
@@ -120,6 +120,10 @@ public abstract class Autonomous extends LinearOpMode
       telemetry.update();
     }
     driveChassis.stop_motors();
+    double howDist = propSensors.frontDistance();
+    double howFarGo = 15;
+    double howFar = howDist - howFarGo;
+    driveChassis.moveForward(howFar);
   }
   
   
