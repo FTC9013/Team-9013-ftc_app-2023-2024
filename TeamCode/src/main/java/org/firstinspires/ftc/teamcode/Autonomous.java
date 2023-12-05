@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 // ticks per centemeter = 17.7914
 public abstract class Autonomous extends LinearOpMode
 {
+  public Blang blang;
   public MecanumDriveChassis driveChassis;
   public Prop_Sensors propSensors;
   public PixelDropper pixelDropperPurple;
@@ -18,10 +19,14 @@ public abstract class Autonomous extends LinearOpMode
   
   public abstract void goCenter();
   
+  public abstract void turnColor();
+  
   // a timer for the various automation activities.
   @Override
   public void runOpMode()
   {
+    
+    blang = new Blang(hardwareMap);
     propSensors = new Prop_Sensors(hardwareMap, telemetry);
     pixelDropperPurple = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
     pixelDropperYellow = new PixelDropper(hardwareMap, telemetry, "pixelDropperYellow");
@@ -31,6 +36,7 @@ public abstract class Autonomous extends LinearOpMode
     // Declare OpMode members.
     driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     // Wait for the game to start (driver presses PLAY)
+    turnColor();
     waitForStart();
     runtime.reset();
     // run until the end of the match (driver presses STOP)

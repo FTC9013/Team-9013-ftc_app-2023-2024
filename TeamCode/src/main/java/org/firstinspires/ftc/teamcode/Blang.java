@@ -30,138 +30,30 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.internal.system.Deadline;
 
 import java.util.concurrent.TimeUnit;
 
-
 public class Blang
 {
   
-  
   RevBlinkinLedDriver blinkinLedDriver;
   
-  
-  Telemetry.Item patternName;
-  Telemetry.Item display;
-  DisplayKind displayKind;
-  Deadline ledCycleDeadline;
-  Deadline gamepadRateLimit;
-  
-  protected enum DisplayKind
+  public Blang(HardwareMap hardwareMap)
   {
-    MANUAL,
-    AUTO
-  }
-  
-  @Override
-  public void init()
-  {
-    displayKind = DisplayKind.AUTO;
-    
     blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
-    pattern = RevBlinkinLedDriver.BlinkinPattern.RAINBOW_RAINBOW_PALETTE;
-    blinkinLedDriver.setPattern(pattern);
-    
-    display = telemetry.addData("Display Kind: ", displayKind.toString());
-    patternName = telemetry.addData("Pattern: ", pattern.toString());
-    
-    ledCycleDeadline = new Deadline(LED_PERIOD, TimeUnit.SECONDS);
-    gamepadRateLimit = new Deadline(GAMEPAD_LOCKOUT, TimeUnit.MILLISECONDS);
   }
   
-  @Override
-  public void loop()
+  public void turnRed()
   {
-    handleGamepad();
-    
-    if (displayKind == DisplayKind.AUTO)
-    {
-      doAutoDisplay();
-    } else
-    {
-      /*
-       * MANUAL mode: Nothing to do, setting the pattern as a result of a gamepad event.
-       */
-    }
+    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
   }
-  
-  /*
-   * handleGamepad
-   *
-   * Responds to a gamepad button press.  Demonstrates rate limiting for
-   * button presses.  If loop() is called every 10ms and and you don't rate
-   * limit, then any given button press may register as multiple button presses,
-   * which in this application is problematic.
-   *
-   * A: Manual mode, Right bumper displays the next pattern, left bumper displays the previous pattern.
-   * B: Auto mode, pattern cycles, changing every LED_PERIOD seconds.
-   */
-  protected void handleGamepad()
+  public void turnBlue()
   {
-    /*if (!gamepadRateLimit.hasExpired())
-    {
-      return;
-    }
-    
-    if (gamepad1.a)
-    {
-      setDisplayKind(DisplayKind.MANUAL);
-      gamepadRateLimit.reset();
-    } else if (gamepad1.b)
-    {
-      setDisplayKind(DisplayKind.AUTO);
-      gamepadRateLimit.reset();
-    } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.left_bumper))
-    {
-      pattern = pattern.previous();
-      displayPattern();
-      gamepadRateLimit.reset();
-    } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.right_bumper))
-    {
-      pattern = pattern.next();
-      displayPattern();
-      gamepadRateLimit.reset();
-    }
-    
-     */
-    if (gamepad1.y)
-    {
-      pattern = RevBlinkinLedDriver.BlinkinPattern.BLUE;
-      displayPattern();
-      
-    }
-    if (gamepad1.x)
-    {
-      pattern = RevBlinkinLedDriver.BlinkinPattern.RED;
-      displayPattern();
-    }
-    
+    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
   }
-  
-  protected void setDisplayKind(DisplayKind displayKind)
-  {
-    this.displayKind = displayKind;
-    display.setValue(displayKind.toString());
-  }
-  
-  protected void doAutoDisplay()
-  {
-    if (ledCycleDeadline.hasExpired())
-    {
-      pattern = pattern.next();
-      displayPattern();
-      ledCycleDeadline.reset();
-    }
-  }
-  
-  protected void displayPattern()
-  {
-    blinkinLedDriver.setPattern(pattern);
-    patternName.setValue(pattern.toString());
-  }
-  
   
 }

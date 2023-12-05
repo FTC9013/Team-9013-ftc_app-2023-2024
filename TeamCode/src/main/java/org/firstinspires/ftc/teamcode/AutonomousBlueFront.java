@@ -4,6 +4,10 @@ package org.firstinspires.ftc.teamcode;
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Blue Front")
 public class AutonomousBlueFront extends Autonomous
 {
+  public void turnColor()
+  {
+    blang.turnBlue();
+  }
   
   public void goCenter()
   {
