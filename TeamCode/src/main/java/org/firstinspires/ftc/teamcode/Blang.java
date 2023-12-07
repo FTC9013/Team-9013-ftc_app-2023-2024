@@ -32,11 +32,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.internal.system.Deadline;
-
-import java.util.concurrent.TimeUnit;
-
 public class Blang
 {
   
@@ -49,11 +44,25 @@ public class Blang
   
   public void turnRed()
   {
-    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
-  }
-  public void turnBlue()
-  {
-    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLUE);
+    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_RED);
   }
   
+  public void turnBlue()
+  {
+    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BREATH_BLUE);
+  }
+  
+  public void YIPPIE()
+  {
+    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_RAINBOW_PALETTE);
+  }
 }
+
+
+
+/*
+BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG
+BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG
+BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG BLANG
+BLANG BLANG BLANG BLANG BLANG BLANG BLANG
+ */

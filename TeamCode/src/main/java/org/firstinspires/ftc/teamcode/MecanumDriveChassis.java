@@ -315,6 +315,10 @@ public class MecanumDriveChassis
   
   public void moveForward(double distanceCm)
   {
+    
+    telemetry.addLine("moving forward");
+    telemetry.update();
+    
     startMovingForward(distanceCm);
     while (stillMoving())
     {
@@ -370,6 +374,9 @@ public class MecanumDriveChassis
   public void moveBackward(double distanceCm)
   {
     
+    telemetry.addLine("moving backward");
+    telemetry.update();
+    
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -406,6 +413,9 @@ public class MecanumDriveChassis
   
   public void strafeLeft(double distanceCm)
   {
+    telemetry.addLine("strafing left");
+    telemetry.update();
+    
     int distance = (int) (distanceCm * tickPerCm);
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -443,6 +453,8 @@ public class MecanumDriveChassis
   
   public void strafeRight(int distanceCm)
   {
+    telemetry.addLine("strafing right");
+    telemetry.update();
     int distance = (int) (distanceCm * tickPerCm);
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);

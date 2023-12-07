@@ -121,7 +121,7 @@ public abstract class Autonomous extends LinearOpMode
     }
     driveChassis.stop_motors();
     double howDist = propSensors.frontDistance();
-    double howFarGo = 15;
+    double howFarGo = 10;
     double howFar = howDist - howFarGo;
     driveChassis.moveForward(howFar);
   }

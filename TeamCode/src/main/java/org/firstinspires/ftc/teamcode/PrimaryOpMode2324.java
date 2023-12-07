@@ -30,7 +30,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 /*
@@ -45,9 +44,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name = "Primary Op Mode 23-24", group = "Robot")
 
-public class PrimaryOpMode2324 extends LinearOpMode
+public abstract class PrimaryOpMode2324 extends LinearOpMode
 {
   
   /* Declare OpMode members. */
@@ -59,6 +57,9 @@ public class PrimaryOpMode2324 extends LinearOpMode
   public PixelDropper purplePixelDropper;
   public PixelDropper yellowPixelDropper;
   public ArmControl arm;
+  public Blang blang;
+  
+  public abstract void turnColor();
   
   @Override
   public void runOpMode()
@@ -70,8 +71,10 @@ public class PrimaryOpMode2324 extends LinearOpMode
     purplePixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");
     yellowPixelDropper = new PixelDropper(hardwareMap, telemetry, "pixelDropperYellow");
     arm = new ArmControl(hardwareMap, telemetry);
+    blang = new Blang(hardwareMap);
     telemetry.addData(">", "Robot Ready.  Press Play.");    //
     telemetry.update();
+    turnColor();
     
     // Wait for the game to start (driver presses PLAY)
     waitForStart();
@@ -79,7 +82,7 @@ public class PrimaryOpMode2324 extends LinearOpMode
     // run until the end of the match (driver presses STOP)
     while (opModeIsActive())
     {
-      if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75)
+      if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75 && gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
       {
         airplane.launch();
       }
@@ -95,12 +98,13 @@ public class PrimaryOpMode2324 extends LinearOpMode
       {
         yellowPixelDropper.drop_pixel();
       }
-      if (gamepad2.dpad_up)
+      if (gamepad2.dpad_up && gamepad1.b)
       {
         mast.mastUp();
-      } else if (gamepad2.dpad_down)
+      } else if (gamepad2.dpad_down && gamepad1.b)
       {
         mast.mastDown();
+        blang.YIPPIE();
       } else
       {
         mast.mastStop();

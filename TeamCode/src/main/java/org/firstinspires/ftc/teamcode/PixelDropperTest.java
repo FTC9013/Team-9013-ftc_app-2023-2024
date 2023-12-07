@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Pixel Dropper Test", group = "Linear Opmode")
+@Disabled
 public class PixelDropperTest extends LinearOpMode
 {
   public Prop_Sensors propSensors;
@@ -13,6 +15,7 @@ public class PixelDropperTest extends LinearOpMode
   
   // a timer for the various automation activities.
   @Override
+  
   public void runOpMode()
   {
     pixelDropperPurple = new PixelDropper(hardwareMap, telemetry, "pixelDropperPurple");

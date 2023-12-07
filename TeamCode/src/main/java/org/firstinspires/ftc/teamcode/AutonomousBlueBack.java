@@ -16,8 +16,9 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.moveBackward(8);
     driveChassis.turnLeft();
     goBackboard(100);
+    driveChassis.strafeRight(12);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeRight(60);
+    driveChassis.strafeRight(50);
   }
   
   public void goRight()

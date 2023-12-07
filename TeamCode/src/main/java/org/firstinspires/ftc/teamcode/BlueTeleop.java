@@ -29,11 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 /*
  * This OpMode executes a POV Game style Teleop for a direct drive robot
@@ -47,42 +43,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-public class MastArm
+@TeleOp(name = "Blue :)", group = "Robot")
+
+public class BlueTeleop extends PrimaryOpMode2324
 {
-  public DcMotor driveMotor = null;
-  private final Telemetry telemetry;
   
-  MastArm(HardwareMap hardwareMap, Telemetry theTelemetry)
+  public void turnColor()
   {
-    
-    telemetry = theTelemetry;
-    double drive;
-    
-    
-    // Define and Initialize Motors
-    driveMotor = hardwareMap.get(DcMotor.class, "arm");
-    
-    // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
-    // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
-    // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-    driveMotor.setDirection(DcMotor.Direction.FORWARD);
-    
-  }
-  
-  public void mastUp()
-  {
-    driveMotor.setPower(1);
-    telemetry.addLine("Pulling up");
-  }
-  
-  public void mastDown()
-  {
-    driveMotor.setPower(-1);
-    telemetry.addLine("Pulling down");
-  }
-  
-  public void mastStop()
-  {
-    driveMotor.setPower(0);
+    blang.turnBlue();
   }
 }
