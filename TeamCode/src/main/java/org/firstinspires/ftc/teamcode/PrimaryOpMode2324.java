@@ -85,6 +85,8 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75 && gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
       {
         airplane.launch();
+        sleep(2000);
+        airplane.resetLauncher();
       }
       if (gamepad2.right_trigger > 0.75 && gamepad2.x)
       {
@@ -136,43 +138,3 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
     }
   }
 }
-/*
-One Gamepad Controls:
-===============================
-      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
-      {
-        airplane.launch();
-      }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.x)
-      {
-        airplane.resetLauncher();
-      }
-      if (gamepad1.right_bumper && gamepad1.right_trigger > 0.75)
-      {
-        purplePixelDropper.drop_pixel();
-      }
-      if (gamepad1.left_bumper && gamepad1.left_trigger > 0.75)
-      {
-        yellowPixelDropper.drop_pixel();
-      }
-      ===============================
-            Two Gamepads Controls:
-      ===============================
-      if (gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
-      {
-        airplane.launch();
-      }
-      if (gamepad1.right_trigger > 0.75 && gamepad1.x)
-      {
-        airplane.resetLauncher();
-      }
-      if (gamepad2.right_bumper && gamepad2a.right_trigger > 0.75)
-      {
-        purplePixelDropper.drop_pixel();
-      }
-      if (gamepad2.left_bumper && gamepad2.left_trigger > 0.75)
-      {
-        yellowPixelDropper.drop_pixel();
-      }
-
- */

@@ -65,16 +65,13 @@ public abstract class Autonomous extends LinearOpMode
       telemetry.update();
       
       
-      if (propLocation == Prop_Sensors.PropSide.Right)
+      if (propLocation == Prop_Sensors.PropSide.Left)
       {
-        driveChassis.strafeLeft(2);
-        driveChassis.turnRight();
-        driveChassis.strafeLeft(6);
-        driveChassis.moveForward(2);
+        driveChassis.turnLeft();
+        driveChassis.moveForward(5);
+        driveChassis.strafeLeft(8);
         pixelDropperPurple.drop_pixel();
-        telemetry.addLine("Going right");
-        telemetry.update();
-        goRight();
+        goLeft();
       } else if (propLocation == Prop_Sensors.PropSide.Front)
       {
         telemetry.addLine("fooooorrrrwwwwaaaaaaarrrd");
@@ -87,11 +84,14 @@ public abstract class Autonomous extends LinearOpMode
         goCenter();
       } else
       {
-        driveChassis.turnLeft();
-        driveChassis.moveForward(5);
-        driveChassis.strafeLeft(8);
+        driveChassis.strafeLeft(2);
+        driveChassis.turnRight();
+        driveChassis.strafeLeft(6);
+        driveChassis.moveForward(2);
         pixelDropperPurple.drop_pixel();
-        goLeft();
+        telemetry.addLine("Going right");
+        telemetry.update();
+        goRight();
       }
       
       while (opModeIsActive())

@@ -30,7 +30,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -61,24 +60,25 @@ public class MastArm
     
     // Define and Initialize Motors
     driveMotor = hardwareMap.get(DcMotor.class, "arm");
-    
+    driveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    driveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
     // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
     // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-    driveMotor.setDirection(DcMotor.Direction.FORWARD);
+    driveMotor.setDirection(DcMotor.Direction.REVERSE);
     
   }
   
   public void mastUp()
   {
-    driveMotor.setPower(1);
-    telemetry.addLine("Pulling up");
+    driveMotor.setPower(-0.75);
+    telemetry.addLine("Pulling up ;- )");
   }
   
   public void mastDown()
   {
-    driveMotor.setPower(-1);
-    telemetry.addLine("Pulling down");
+    driveMotor.setPower(0.75);
+    telemetry.addLine("Pulling down ;- )");
   }
   
   public void mastStop()

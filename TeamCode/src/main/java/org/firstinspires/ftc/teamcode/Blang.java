@@ -56,6 +56,11 @@ public class Blang
   {
     blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.COLOR_WAVES_RAINBOW_PALETTE);
   }
+  
+  public void Off()
+  {
+    blinkinLedDriver.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+  }
 }
 
 

@@ -15,6 +15,7 @@ public class AutonomousRedBack extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.turnRight();
+    driveChassis.strafeRight(3);
     goBackboard(105);
     pixelDropperYellow.drop_pixel();
     driveChassis.strafeLeft(45);
@@ -26,11 +27,11 @@ public class AutonomousRedBack extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.strafeRight(60);
-    driveChassis.moveForward(40);
+    driveChassis.moveForward(60);
     driveChassis.strafeLeft(18);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(75);
+    driveChassis.strafeLeft(55);
   }
   
   public void goLeft()
