@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Sensor Test", group = "Linear Opmode")
-@Disabled
+
 public class SensorTest extends LinearOpMode
 {
   public Prop_Sensors propSensors;
@@ -29,31 +28,11 @@ public class SensorTest extends LinearOpMode
     waitForStart();
     runtime.reset();
     // run until the end of the match (driver presses STOP)
-    driveChassis.turnLeft();
-    /*
     while (opModeIsActive())
     {
-      driveChassis.turnLeft();
-      if (propSensors.detectProp() == Prop_Sensors.PropSide.Front)
-      {
-        
-        telemetry.addLine("Prop on the frontey");
-      } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Left)
-      {
-        driveChassis.faceLeft();
-        telemetry.addLine("Prop on the Leftey");
-        
-      } else if (propSensors.detectProp() == Prop_Sensors.PropSide.Right)
-      {
-        
-        telemetry.addLine("Prop on the Rightey");
-        
-      }
       
+      telemetry.addData("font distance is", propSensors.frontDistance());
       telemetry.update();
-      
     }
-    
-     */
   }
 }

@@ -104,6 +104,17 @@ public abstract class Autonomous extends LinearOpMode
       
     }
   }
+  public void yellowGoRight(double distRight)
+  {
+   double distTravel = distRight - propSensors.leftDistance();
+    driveChassis.strafeRight(distTravel);
+  }
+  
+  public void yellowGoLeft(double distLeft)
+  {
+    double distTravel = distLeft - propSensors.rightDistance();
+    driveChassis.strafeLeft(distTravel);
+  }
   
   public void goBackboard(double failSafe)
   {

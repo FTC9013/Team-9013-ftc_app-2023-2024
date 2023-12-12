@@ -451,7 +451,7 @@ public class MecanumDriveChassis
   }
   
   
-  public void strafeRight(int distanceCm)
+  public void strafeRight(double distanceCm)
   {
     telemetry.addLine("strafing right");
     telemetry.update();

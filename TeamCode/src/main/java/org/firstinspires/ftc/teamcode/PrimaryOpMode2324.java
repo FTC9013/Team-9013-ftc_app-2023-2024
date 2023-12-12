@@ -106,7 +106,6 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       } else if (gamepad2.dpad_down && gamepad1.b)
       {
         mast.mastDown();
-        blang.YIPPIE();
       } else
       {
         mast.mastStop();
