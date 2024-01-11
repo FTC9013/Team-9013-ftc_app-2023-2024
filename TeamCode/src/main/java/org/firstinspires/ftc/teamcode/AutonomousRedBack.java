@@ -18,7 +18,7 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.strafeRight(3);
     goBackboard(105);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(45);
+    parkingBotCheckRed(45);
   }
   
   public void goRight()
@@ -31,7 +31,7 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.strafeLeft(18);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(55);
+    parkingBotCheckRed(55);
   }
   
   public void goLeft()
@@ -44,7 +44,7 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.strafeLeft(7);
     goBackboard(100);
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(60);
+    parkingBotCheckRed(60);
   }
   
   
