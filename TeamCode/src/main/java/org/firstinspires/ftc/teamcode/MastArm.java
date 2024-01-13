@@ -61,10 +61,10 @@ public class MastArm
     
     
     // Define and Initialize Motors
-    driveMotor = hardwareMap.get(DcMotor.class, "arm");
+    driveMotor = hardwareMap.get(DcMotor.class, "mast");
     driveMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     driveMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    touchSensor = hardwareMap.get(TouchSensor.class, "sensor_touch");
+    touchSensor = hardwareMap.get(TouchSensor.class, "mast_failsafe");
     // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
     // Pushing the left stick forward MUST make robot go forward. So adjust these two lines based on your first test drive.
     // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
@@ -74,23 +74,26 @@ public class MastArm
   
   public void mastUp()
   {
-    driveMotor.setPower(-0.75);
+    driveMotor.setPower(0.75);
     telemetry.addLine("Pulling up ;- )");
   }
   
   public void mastDown()
   {
-    if (!touchSensor.isPressed()) {
-      driveMotor.setPower(0.75);
+    if (!touchSensor.isPressed())
+    {
+      driveMotor.setPower(-0.75);
       telemetry.addLine("Pulling down ;- )");
-    }
-    else {
+    } else
+    {
+      telemetry.addLine("Mast stopped :) Due to Touch Sensor");
       mastStop();
     }
   }
   
   public void mastStop()
   {
+    telemetry.addData("Touch Sensor: ", touchSensor.isPressed());
     driveMotor.setPower(0);
   }
 }

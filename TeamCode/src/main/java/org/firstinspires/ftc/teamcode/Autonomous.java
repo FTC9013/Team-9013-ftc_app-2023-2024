@@ -111,6 +111,12 @@ public abstract class Autonomous extends LinearOpMode
     driveChassis.strafeRight(distTravel);
   }
   
+  public void yellowGoLeft(double distLeft)
+  {
+    double distTravel = distLeft - propSensors.rightDistance();
+    driveChassis.strafeLeft(distTravel);
+  }
+  
   public void parkingBotCheckBlue(double distCm)
   {
     if (propSensors.rightDistance() > distCm)
@@ -127,11 +133,6 @@ public abstract class Autonomous extends LinearOpMode
     }
   }
   
-  public void yellowGoLeft(double distLeft)
-  {
-    double distTravel = distLeft - propSensors.rightDistance();
-    driveChassis.strafeLeft(distTravel);
-  }
   
   public void goBackboard(double failSafe)
   {

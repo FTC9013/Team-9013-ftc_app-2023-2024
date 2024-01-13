@@ -19,7 +19,7 @@ public class MecanumDriveChassis
 {
   IMU imu;
   
-  
+  double actualSpeed;
   double tickPerCm = 17.7914;
   private ElapsedTime runTime = new ElapsedTime();
   double autonomousPower = 0.4;
@@ -37,7 +37,7 @@ public class MecanumDriveChassis
   // Robot speed [-1, 1].  (speed in any direction that is not rotational)
   // does not have any angular component, just scaler velocity.
   // combined with the angular component for motion.  Even if angle is 0 (forward).
-  private static double vD = 0;
+  private static double inputSpeed = 0;
   // Robot angle while moving [0, 2PI] or [0, +/-PI]. (angle to displace the center of the bot,
   // ASDF)
   // relative to the direction the bot is facing.
@@ -96,7 +96,7 @@ public class MecanumDriveChassis
     rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
     rightRearDrive.setDirection(DcMotor.Direction.REVERSE);
     // set motion parameters.
-    vD = 0;
+    inputSpeed = 0;
     thetaD = 0;
     rotationalSpeed = 0;
     // Set all the motor speeds.
@@ -144,17 +144,17 @@ public class MecanumDriveChassis
     
     if (!goFast)
     {
-      vD = (.425 * vD);
+      inputSpeed = (.425 * inputSpeed);
       rotationalSpeed = (.375 * rotationalSpeed);
       telemetry.addData("goFast: ", "off");
     } else
     {
-      vD = (0.9 * vD);
+      inputSpeed = (0.9 * inputSpeed);
       rotationalSpeed = (.45 * rotationalSpeed);
     }
     
     telemetry.addData("Theta(Degrees)", thetaD);
-    telemetry.addData("vD", vD);
+    telemetry.addData("inputSpeed", inputSpeed);
     // Math out what to send to the motors and send it.
     PowerToWheels();
   }
@@ -163,7 +163,7 @@ public class MecanumDriveChassis
   {
     // determines the translation speed by taking the hypotenuse of the vector created by
     // the X & Y components.
-    vD = Math.min(Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(-leftStickY, 2)), 1);
+    inputSpeed = Math.min(Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(-leftStickY, 2)), 1);
     // Converts the joystick inputs from cartesian to polar from 0 to +/- PI oriented
     // with 0 to the right of the robot. (standard polar plot)
     thetaD = Math.atan2(-leftStickY, leftStickX);
@@ -178,13 +178,15 @@ public class MecanumDriveChassis
   
   private void PowerToWheels()
   {
-    
+    actualSpeed += (inputSpeed - actualSpeed) * 0.2;
+    telemetry.addData("Actual Speed:", actualSpeed);
     double currentLeftFrontSpeed = leftFrontDriveSpeed;
     double currentLeftRearSpeed = leftRearDriveSpeed;
     double currentRightFrontSpeed = rightFrontDriveSpeed;
     double currentRightRearSpeed = rightRearDriveSpeed;
-    if (vD < .03)
+    if (inputSpeed < .03)
     {
+      actualSpeed = 0;
       leftFrontDriveSpeed = 0;
       rightFrontDriveSpeed = 0;
       leftRearDriveSpeed = 0;
@@ -192,31 +194,31 @@ public class MecanumDriveChassis
       telemetry.addData("Expected Direction: ", "Stopped");
     } else if (thetaD >= (Math.PI * -2) / 8 && thetaD < (Math.PI * 2 / 8))
     {
-      leftFrontDriveSpeed = vD;
-      rightFrontDriveSpeed = -vD;
-      leftRearDriveSpeed = -vD;
-      rightRearDriveSpeed = vD;
+      leftFrontDriveSpeed = actualSpeed;
+      rightFrontDriveSpeed = -actualSpeed;
+      leftRearDriveSpeed = -actualSpeed;
+      rightRearDriveSpeed = actualSpeed;
       telemetry.addData("Expected Direction: ", "Right");
     } else if (thetaD >= (Math.PI * 2 / 8) && thetaD < (Math.PI * 6 / 8))
     {
-      leftFrontDriveSpeed = vD;
-      rightFrontDriveSpeed = vD;
-      leftRearDriveSpeed = vD;
-      rightRearDriveSpeed = vD;
+      leftFrontDriveSpeed = actualSpeed;
+      rightFrontDriveSpeed = actualSpeed;
+      leftRearDriveSpeed = actualSpeed;
+      rightRearDriveSpeed = actualSpeed;
       telemetry.addData("Expected Direction: ", "Up");
     } else if (thetaD >= (Math.PI * 6 / 8) || thetaD < Math.PI * -6 / 8)
     {
-      leftFrontDriveSpeed = -vD;
-      rightFrontDriveSpeed = vD;
-      leftRearDriveSpeed = vD;
-      rightRearDriveSpeed = -vD;
+      leftFrontDriveSpeed = -actualSpeed;
+      rightFrontDriveSpeed = actualSpeed;
+      leftRearDriveSpeed = actualSpeed;
+      rightRearDriveSpeed = -actualSpeed;
       telemetry.addData("Expected Direction: ", "Left");
     } else if (thetaD >= (Math.PI * -6 / 8) && thetaD < (Math.PI * -2 / 8))
     {
-      leftFrontDriveSpeed = -vD;
-      rightFrontDriveSpeed = -vD;
-      leftRearDriveSpeed = -vD;
-      rightRearDriveSpeed = -vD;
+      leftFrontDriveSpeed = -actualSpeed;
+      rightFrontDriveSpeed = -actualSpeed;
+      leftRearDriveSpeed = -actualSpeed;
+      rightRearDriveSpeed = -actualSpeed;
       telemetry.addData("Expected Direction: ", "Down");
     } else
     {
