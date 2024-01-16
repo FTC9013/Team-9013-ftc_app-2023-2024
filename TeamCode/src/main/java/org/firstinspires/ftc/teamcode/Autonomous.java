@@ -122,6 +122,10 @@ public abstract class Autonomous extends LinearOpMode
     if (propSensors.rightDistance() > distCm)
     {
       driveChassis.strafeRight(distCm);
+    } else
+    {
+      double distance = propSensors.leftDistance() - 2;
+      driveChassis.strafeLeft(distance);
     }
   }
   
@@ -130,6 +134,10 @@ public abstract class Autonomous extends LinearOpMode
     if (propSensors.leftDistance() > distCm)
     {
       driveChassis.strafeLeft(distCm);
+    } else
+    {
+      double distance = propSensors.rightDistance() - 2;
+      driveChassis.strafeRight(distance);
     }
   }
   

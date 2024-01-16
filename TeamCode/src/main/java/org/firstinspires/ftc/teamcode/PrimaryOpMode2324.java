@@ -100,10 +100,10 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       {
         yellowPixelDropper.drop_pixel();
       }
-      if (gamepad2.dpad_up && gamepad1.b)
+      if (gamepad2.dpad_up)
       {
         mast.mastUp();
-      } else if (gamepad2.dpad_down && gamepad1.b)
+      } else if (gamepad2.dpad_down)
       {
         mast.mastDown();
       } else

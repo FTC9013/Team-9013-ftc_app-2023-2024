@@ -16,7 +16,7 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.moveBackward(8);
     driveChassis.turnLeft();
     goBackboard(100);
-    driveChassis.strafeRight(12);
+    yellowGoRight(75);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(50);
   }
@@ -29,6 +29,7 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.turnLeft();
     driveChassis.turnLeft();
     goBackboard(95);
+    yellowGoRight(90);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(45);
   }
@@ -39,7 +40,7 @@ public class AutonomousBlueBack extends Autonomous
     telemetry.update();
     driveChassis.strafeLeft(38);
     driveChassis.moveForward(50);
-    driveChassis.strafeRight(17);
+    yellowGoRight(53);
     goBackboard(55);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(75);
