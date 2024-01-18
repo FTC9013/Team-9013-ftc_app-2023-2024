@@ -30,11 +30,11 @@ public class AutonomousBlueFront extends Autonomous
     telemetry.update();
     driveChassis.strafeRight(6);
     driveChassis.turnLeft();
-    driveChassis.strafeRight(2);
+    driveChassis.strafeLeft(4);
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
-    yellowGoRight(95);
+    yellowGoRight(100);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(45);
@@ -49,12 +49,10 @@ public class AutonomousBlueFront extends Autonomous
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
-    yellowGoRight(53);
+    yellowGoRight(55);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(75);
   }
-  
-  
 }
   
