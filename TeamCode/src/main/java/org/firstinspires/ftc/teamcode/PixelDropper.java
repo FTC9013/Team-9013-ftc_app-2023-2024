@@ -64,6 +64,19 @@ public class PixelDropper
     resetDropper();
   }
   
+  public void drop_Purple()
+  {
+    runTime.reset();
+    pixelMotor.setPosition(0);
+    telemetry.addLine("Doppign");
+  }
+  
+  public void lift()
+  {
+    telemetry.addLine("Liftig");
+    pixelMotor.setPosition(1);
+  }
+  
   public void resetDropper()
   {
     runTime.reset();

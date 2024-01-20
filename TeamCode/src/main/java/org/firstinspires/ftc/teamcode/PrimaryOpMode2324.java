@@ -80,6 +80,7 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
     waitForStart();
     
     // run until the end of the match (driver presses STOP)
+    //2 driver controls:
     while (opModeIsActive())
     {
       if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75 && gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
@@ -124,6 +125,15 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       {
         arm.toggleGripper();
       }
+      if (gamepad2.left_bumper)
+      {
+        purplePixelDropper.drop_Purple();
+      }
+      if (gamepad2.right_bumper)
+      {
+        purplePixelDropper.lift();
+      }
+      
       telemetry.update();
       telemetry.addData("LStickY", gamepad1.left_stick_y * -1);
       telemetry.addData("LStickX", gamepad1.left_stick_x);

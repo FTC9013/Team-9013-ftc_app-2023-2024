@@ -16,7 +16,7 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(8);
     driveChassis.turnRight();
     goBackboard(105);
-    yellowGoLeft(71);
+    yellowGoLeft(65);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(45);
   }
@@ -28,8 +28,8 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(8);
     driveChassis.strafeRight(60);
     driveChassis.moveForward(60);
+    yellowGoLeft(50);
     goBackboard(70);
-    yellowGoLeft(56);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(60);
   }
@@ -41,7 +41,7 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.turnRight();
     driveChassis.turnRight();
-    yellowGoLeft(88);
+    yellowGoLeft(70);
     goBackboard(100);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(55);
