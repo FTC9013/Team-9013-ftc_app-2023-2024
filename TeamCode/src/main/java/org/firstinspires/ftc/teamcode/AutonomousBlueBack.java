@@ -11,12 +11,12 @@ public class AutonomousBlueBack extends Autonomous
   
   public void goCenter()
   {
-    telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
+    telemetry.addLine("PROP DETECTION: Ite no left or reight so fowawrd");
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.turnLeft();
     goBackboard(100);
-    yellowGoRight(71);
+    goAwayFromLeftWall(71);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(50);
   }
@@ -29,7 +29,7 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.turnLeft();
     driveChassis.turnLeft();
     goBackboard(95);
-    yellowGoRight(88);
+    goAwayFromLeftWall(88);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(45);
   }
@@ -40,7 +40,7 @@ public class AutonomousBlueBack extends Autonomous
     telemetry.update();
     driveChassis.strafeLeft(38);
     driveChassis.moveForward(50);
-    yellowGoRight(56);
+    goAwayFromLeftWall(56);
     goBackboard(55);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(75);

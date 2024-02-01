@@ -83,7 +83,8 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
     //2 driver controls:
     while (opModeIsActive())
     {
-      if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75 && gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
+      if (gamepad2.right_trigger > 0.75 && gamepad2.left_trigger > 0.75 &&
+        gamepad1.right_trigger > 0.75 && gamepad1.left_trigger > 0.75)
       {
         airplane.launch();
         sleep(2000);

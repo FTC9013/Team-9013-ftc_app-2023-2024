@@ -1,43 +1,38 @@
 package org.firstinspires.ftc.teamcode;
 
 // ticks per centemeter = 17.7914
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Blue Front")
-public class AutonomousBlueFront extends Autonomous
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Red Front PARK")
+public class RedFrontPARK extends Autonomous
 {
   public void turnColor()
   {
-    blang.turnBlue();
+    blang.turnRed();
   }
   
   public void goCenter()
   {
-    driveChassis.moveForward(2);
     telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
     telemetry.update();
     driveChassis.strafeRight(9);
     driveChassis.moveBackward(propSensors.backDistance() - 1);
-    driveChassis.strafeLeft(200);
-    driveChassis.turnLeft();
-    goAwayFromLeftWall(75);
-    goBackboard(70);
+    driveChassis.strafeRight(200);
+    driveChassis.turnRight();
+    driveChassis.moveForward(40);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(50);
   }
   
   public void goRight()
   {
-    telemetry.addLine("PROP DETECTION: Right");
+    telemetry.addLine("PROP DETECTION: Righte");
     telemetry.update();
     driveChassis.strafeRight(6);
     driveChassis.turnLeft();
     driveChassis.strafeLeft(4);
     driveChassis.moveBackward(propSensors.backDistance() - 1);
-    driveChassis.strafeLeft(200);
-    driveChassis.turnLeft();
-    goAwayFromLeftWall(100);
-    goBackboard(70);
+    driveChassis.strafeRight(200);
+    driveChassis.turnRight();
+    driveChassis.moveForward(40);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(45);
   }
   
   public void goLeft()
@@ -47,12 +42,12 @@ public class AutonomousBlueFront extends Autonomous
     driveChassis.moveBackward(5);
     driveChassis.turnRight();
     driveChassis.moveBackward(propSensors.backDistance() - 1);
-    driveChassis.strafeLeft(200);
-    driveChassis.turnLeft();
-    goAwayFromLeftWall(55);
-    goBackboard(70);
+    driveChassis.strafeRight(200);
+    driveChassis.turnRight();
+    driveChassis.moveForward(40);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(75);
   }
+  
+  
 }
   

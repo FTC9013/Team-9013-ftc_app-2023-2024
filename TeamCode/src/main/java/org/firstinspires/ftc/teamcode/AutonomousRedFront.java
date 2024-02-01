@@ -17,7 +17,7 @@ public class AutonomousRedFront extends Autonomous
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeRight(200);
     driveChassis.turnRight();
-    yellowGoLeft(70);
+    goAwayFromRightWall(70);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(50);
@@ -33,7 +33,7 @@ public class AutonomousRedFront extends Autonomous
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeRight(200);
     driveChassis.turnRight();
-    yellowGoLeft(50);
+    goAwayFromRightWall(50);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(125);
@@ -49,7 +49,7 @@ public class AutonomousRedFront extends Autonomous
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeRight(200);
     driveChassis.turnRight();
-    yellowGoLeft(78);
+    goAwayFromRightWall(78);
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(45);

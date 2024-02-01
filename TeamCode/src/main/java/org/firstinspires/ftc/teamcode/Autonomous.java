@@ -74,7 +74,7 @@ public abstract class Autonomous extends LinearOpMode
         goLeft();
       } else if (propLocation == Prop_Sensors.PropSide.Front)
       {
-        telemetry.addLine("fooooorrrrwwwwaaaaaaarrrd");
+        telemetry.addLine("forward");
         telemetry.update();
         driveChassis.moveBackward(9);
         driveChassis.strafeLeft(9);
@@ -105,13 +105,13 @@ public abstract class Autonomous extends LinearOpMode
     }
   }
   
-  public void yellowGoRight(double distRight)
+  public void goAwayFromLeftWall(double distRight)
   {
     double distTravel = distRight - propSensors.leftDistance();
     driveChassis.strafeRight(distTravel);
   }
   
-  public void yellowGoLeft(double distLeft)
+  public void goAwayFromRightWall(double distLeft)
   {
     double distTravel = distLeft - propSensors.rightDistance();
     driveChassis.strafeLeft(distTravel);
