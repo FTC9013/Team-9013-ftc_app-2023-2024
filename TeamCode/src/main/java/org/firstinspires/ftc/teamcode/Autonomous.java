@@ -21,6 +21,8 @@ public abstract class Autonomous extends LinearOpMode
   
   public abstract void turnColor();
   
+  public abstract double yellowOffset();
+  
   // a timer for the various automation activities.
   @Override
   public void runOpMode()
@@ -87,7 +89,7 @@ public abstract class Autonomous extends LinearOpMode
         driveChassis.strafeLeft(2);
         driveChassis.turnRight();
         driveChassis.strafeLeft(6);
-        driveChassis.moveForward(2);
+        driveChassis.moveForward(5);
         pixelDropperPurple.drop_pixel();
         telemetry.addLine("Going right");
         telemetry.update();

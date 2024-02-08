@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 // ticks per centemeter = 17.7914
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Blue Front")
-public class AutonomousBlueFront extends Autonomous
+
+public abstract class AutonomousBlueFront extends Autonomous
 {
   public void turnColor()
   {
@@ -15,10 +15,10 @@ public class AutonomousBlueFront extends Autonomous
     telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
     telemetry.update();
     driveChassis.strafeRight(9);
-    driveChassis.moveBackward(propSensors.backDistance() - 1);
+    driveChassis.moveBackward(propSensors.backDistance() - 0.5);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
-    goAwayFromLeftWall(75);
+    goAwayFromLeftWall(75+yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(50);
@@ -28,13 +28,14 @@ public class AutonomousBlueFront extends Autonomous
   {
     telemetry.addLine("PROP DETECTION: Right");
     telemetry.update();
+    driveChassis.moveBackward(3);
     driveChassis.strafeRight(6);
     driveChassis.turnLeft();
     driveChassis.strafeLeft(4);
-    driveChassis.moveBackward(propSensors.backDistance() - 1);
+    driveChassis.moveBackward(propSensors.backDistance() - 0.5);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
-    goAwayFromLeftWall(100);
+    goAwayFromLeftWall(100+yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(45);
@@ -46,10 +47,10 @@ public class AutonomousBlueFront extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(5);
     driveChassis.turnRight();
-    driveChassis.moveBackward(propSensors.backDistance() - 1);
+    driveChassis.moveBackward(propSensors.backDistance() - 0.5);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
-    goAwayFromLeftWall(55);
+    goAwayFromLeftWall(55+yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(75);

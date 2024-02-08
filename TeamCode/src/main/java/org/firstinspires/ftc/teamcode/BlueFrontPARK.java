@@ -1,9 +1,18 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
+@Disabled
 // ticks per centemeter = 17.7914
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Blue Front PARK")
 public class BlueFrontPARK extends Autonomous
 {
+  @Override
+  public double yellowOffset()
+  {
+    return 0;
+  }
+  
   public void turnColor()
   {
     blang.turnBlue();

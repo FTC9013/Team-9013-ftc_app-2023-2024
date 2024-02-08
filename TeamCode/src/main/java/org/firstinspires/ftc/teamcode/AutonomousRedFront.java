@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 // ticks per centemeter = 17.7914
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Red Front")
-public class AutonomousRedFront extends Autonomous
+
+public abstract class AutonomousRedFront extends Autonomous
 {
   public void turnColor()
   {
@@ -11,13 +11,14 @@ public class AutonomousRedFront extends Autonomous
   
   public void goCenter()
   {
+    sleep(5000);
     telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
     telemetry.update();
     driveChassis.strafeRight(9);
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeRight(200);
     driveChassis.turnRight();
-    goAwayFromRightWall(70);
+    goAwayFromRightWall(70 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(50);
@@ -25,15 +26,17 @@ public class AutonomousRedFront extends Autonomous
   
   public void goRight()
   {
+    sleep(5000);
     telemetry.addLine("PROP DETECTION: Righte");
     telemetry.update();
+    driveChassis.moveBackward(3);
     driveChassis.strafeRight(6);
     driveChassis.turnLeft();
     driveChassis.strafeLeft(4);
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeRight(200);
     driveChassis.turnRight();
-    goAwayFromRightWall(50);
+    goAwayFromRightWall(50 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(125);
@@ -42,6 +45,7 @@ public class AutonomousRedFront extends Autonomous
   
   public void goLeft()
   {
+    sleep(5000);
     telemetry.addLine("PROP DETECTION: Lefte");
     telemetry.update();
     driveChassis.moveBackward(5);
@@ -49,7 +53,7 @@ public class AutonomousRedFront extends Autonomous
     driveChassis.moveBackward(propSensors.backDistance() - 1);
     driveChassis.strafeRight(200);
     driveChassis.turnRight();
-    goAwayFromRightWall(78);
+    goAwayFromRightWall(85.5 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
     parkingBotCheckRed(45);

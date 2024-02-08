@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 // ticks per centemeter = 17.7914
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Blue Back")
-public class AutonomousBlueBack extends Autonomous
+public abstract class AutonomousBlueBack extends Autonomous
 {
   public void turnColor()
   {
@@ -16,9 +15,9 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.moveBackward(8);
     driveChassis.turnLeft();
     goBackboard(100);
-    goAwayFromLeftWall(71);
+    goAwayFromLeftWall(68 + yellowOffset());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(50);
+    parkingBotCheckBlue(70);
   }
   
   public void goRight()
@@ -29,9 +28,9 @@ public class AutonomousBlueBack extends Autonomous
     driveChassis.turnLeft();
     driveChassis.turnLeft();
     goBackboard(95);
-    goAwayFromLeftWall(88);
+    goAwayFromLeftWall(80 + yellowOffset());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(45);
+    parkingBotCheckBlue(65);
   }
   
   public void goLeft()
@@ -40,10 +39,10 @@ public class AutonomousBlueBack extends Autonomous
     telemetry.update();
     driveChassis.strafeLeft(38);
     driveChassis.moveForward(50);
-    goAwayFromLeftWall(56);
+    goAwayFromLeftWall(58 + yellowOffset());
     goBackboard(55);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(75);
+    parkingBotCheckBlue(95);
   }
   
   

@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 // tICKs per centimeter = 17.7914
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Red Back")
-public class AutonomousRedBack extends Autonomous
+
+public abstract class AutonomousRedBack extends Autonomous
 {
   public void turnColor()
   {
@@ -16,22 +16,22 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(8);
     driveChassis.turnRight();
     goBackboard(105);
-    goAwayFromRightWall(65);
+    goAwayFromRightWall(63 + yellowOffset());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckRed(45);
+    parkingBotCheckRed(65);
   }
   
   public void goRight()
   {
     telemetry.addLine("PROP DETECTION: Right");
     telemetry.update();
-    driveChassis.moveBackward(8);
+    driveChassis.moveBackward(11);
     driveChassis.strafeRight(60);
     driveChassis.moveForward(60);
-    goAwayFromRightWall(50);
+    goAwayFromRightWall(50 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckRed(60);
+    parkingBotCheckRed(80);
   }
   
   public void goLeft()
@@ -41,10 +41,10 @@ public class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.turnRight();
     driveChassis.turnRight();
-    goAwayFromRightWall(70);
+    goAwayFromRightWall(70 + yellowOffset());
     goBackboard(100);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckRed(55);
+    parkingBotCheckRed(75);
   }
   
   

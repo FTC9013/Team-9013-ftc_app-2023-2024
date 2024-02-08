@@ -32,6 +32,9 @@ public class SensorTest extends LinearOpMode
     {
       
       telemetry.addData("font distance is", propSensors.frontDistance());
+      telemetry.addData("lef distance is", propSensors.leftDistance());
+      telemetry.addData("rigt distance is", propSensors.rightDistance());
+      telemetry.addData("bak distance is", propSensors.backDistance());
       telemetry.update();
     }
   }
