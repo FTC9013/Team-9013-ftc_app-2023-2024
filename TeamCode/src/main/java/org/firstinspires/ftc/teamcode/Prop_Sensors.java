@@ -70,7 +70,10 @@ public class Prop_Sensors
   
   public double frontDistance()
   {
-    double readings[] = new double[10];
+    
+    return frontSensor.getDistance(DistanceUnit.CM);
+    
+    /*double readings[] = new double[10];
     for (int i = 0; i <= 9; i++)
     {
       readings[i] = frontSensor.getDistance(DistanceUnit.CM);
@@ -80,7 +83,7 @@ public class Prop_Sensors
     {
       averageReadings += readings[i];
     }
-    return averageReadings / 10;
+    return averageReadings / 10; */
   }
   
   public double leftDistance()
