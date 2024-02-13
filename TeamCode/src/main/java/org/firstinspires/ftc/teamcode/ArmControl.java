@@ -2,12 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ArmControl
 {
   private final DcMotor armMotor;
+  private final Servo gripper;
   //private final TouchSensor limitSwitch;
   private final Telemetry telemetry;
   
@@ -17,6 +19,8 @@ public class ArmControl
     telemetry = theTelemetry;
     // Initialize the hardware variables
     armMotor = hardwareMap.get(DcMotor.class, "arm");
+    gripper = hardwareMap.get(Servo.class, "gripper");
+    gripper.setPosition(0);
     //limitSwitch = hardwareMap.get(TouchSensor.class, "limitSwitch");
     armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     // Motors on one side reversed to drive forward
@@ -49,14 +53,13 @@ public class ArmControl
   
   public void toggleGripper()
   {
-  
+    if (gripper.getPosition() == 1)
+    {
+      gripper.setPosition(0);
+    } else
+    {
+      gripper.setPosition(1);
+    }
+    telemetry.addData("Gripping", "True");
   }
 }
-
-
-
-
-
-
-
-

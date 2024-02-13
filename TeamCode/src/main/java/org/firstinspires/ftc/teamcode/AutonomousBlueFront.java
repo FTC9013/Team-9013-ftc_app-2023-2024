@@ -48,10 +48,10 @@ public abstract class AutonomousBlueFront extends Autonomous
     }
     driveChassis.moveForward(10);
     driveChassis.turnLeft();
-    goAwayFromLeftWall(75 + yellowOffset());
+    goAwayFromLeftWall(77 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(50);
+    parkingBotCheckBlue(40, 55);
   }
   
   public void goRight()
@@ -65,10 +65,10 @@ public abstract class AutonomousBlueFront extends Autonomous
     driveChassis.moveBackward(propSensors.backDistance() - 0.5);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
-    goAwayFromLeftWall(100 + yellowOffset());
+    goAwayFromLeftWall(92.5 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(45);
+    parkingBotCheckBlue(40, 40);
   }
   
   public void goLeft()
@@ -83,7 +83,7 @@ public abstract class AutonomousBlueFront extends Autonomous
     goAwayFromLeftWall(55 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(75);
+    parkingBotCheckBlue(40, 70);
   }
 }
   

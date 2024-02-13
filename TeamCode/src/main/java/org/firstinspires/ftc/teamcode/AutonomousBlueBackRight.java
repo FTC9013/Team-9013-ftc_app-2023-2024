@@ -7,6 +7,6 @@ public class AutonomousBlueBackRight extends AutonomousBlueBack
   @Override
   public double yellowOffset()
   {
-    return 5.5;
+    return 7.5;
   }
 }
