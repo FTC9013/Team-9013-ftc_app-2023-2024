@@ -51,7 +51,7 @@ public abstract class AutonomousBlueFront extends Autonomous
     goAwayFromLeftWall(77 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(40, 55);
+    parkingBotCheckBlue(40);
   }
   
   public void goRight()
@@ -68,7 +68,7 @@ public abstract class AutonomousBlueFront extends Autonomous
     goAwayFromLeftWall(92.5 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(40, 40);
+    parkingBotCheckBlue(40);
   }
   
   public void goLeft()
@@ -83,7 +83,7 @@ public abstract class AutonomousBlueFront extends Autonomous
     goAwayFromLeftWall(55 + yellowOffset());
     goBackboard(70);
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(40, 70);
+    parkingBotCheckBlue(40);
   }
 }
   

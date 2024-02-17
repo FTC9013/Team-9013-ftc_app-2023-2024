@@ -119,31 +119,33 @@ public abstract class Autonomous extends LinearOpMode
     driveChassis.strafeLeft(distTravel);
   }
   
-  public void parkingBotCheckBlue(double distCm, double distTravel)
+  public void parkingBotCheckBlue(double distCm)
   {
     if (propSensors.rightDistance() > distCm)
     {
-      driveChassis.strafeRight(distTravel);
-      driveChassis.moveForward(25);
+      double distGo = 130 - propSensors.leftDistance();
+      driveChassis.strafeRight(distGo);
+      driveChassis.moveForward(15);
     } else
     {
       double distance = propSensors.leftDistance() - 2;
       driveChassis.strafeLeft(distance);
-      driveChassis.moveForward(25);
+      driveChassis.moveForward(15);
     }
   }
   
-  public void parkingBotCheckRed(double distCm, double distTravel)
+  public void parkingBotCheckRed(double distCm)
   {
     if (propSensors.leftDistance() > distCm)
     {
-      driveChassis.strafeLeft(distCm);
-      driveChassis.moveForward(25);
+      double distGo = 130 - propSensors.rightDistance();
+      driveChassis.strafeLeft(distGo);
+      driveChassis.moveForward(15);
     } else
     {
       double distance = propSensors.rightDistance() - 2;
       driveChassis.strafeRight(distance);
-      driveChassis.moveForward(25);
+      driveChassis.moveForward(15);
     }
   }
   

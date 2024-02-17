@@ -23,7 +23,7 @@ public class MecanumDriveChassis
   double tickPerCm = 17.7914;
   private ElapsedTime runTime = new ElapsedTime();
   double autonomousPower = 0.4;
-  int turnDistance = 860;
+  int turnDistance = 900; // used to be 860
   int turnDistanceYaw = 880;
   private final DcMotor leftFrontDrive;
   private final DcMotor leftRearDrive;
@@ -319,7 +319,6 @@ public class MecanumDriveChassis
   {
     
     telemetry.addLine("moving forward");
-    telemetry.update();
     
     startMovingForward(distanceCm);
     while (stillMoving())
@@ -501,6 +500,11 @@ public class MecanumDriveChassis
   
   public void turnLeft()
   {
+    turnLeftDistance(turnDistance);
+  }
+  
+  public void turnLeftDistance(int turnDistance)
+  {
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -534,7 +538,13 @@ public class MecanumDriveChassis
     stop_motors();
   }
   
+  
   public void turnRight()
+  {
+    turnRightDistance(turnDistance);
+  }
+  
+  public void turnRightDistance(int turnDistance)
   {
     leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -557,7 +567,6 @@ public class MecanumDriveChassis
     rightFrontDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     leftRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     rightRearDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-    
     leftFrontDrive.setPower(autonomousPower);
     leftRearDrive.setPower(-autonomousPower);
     rightFrontDrive.setPower(-autonomousPower);
@@ -567,6 +576,7 @@ public class MecanumDriveChassis
       //Do nothing. Allows the motors to spin
     }
     stop_motors();
+    
   }
   
   public void faceLeft()
@@ -602,13 +612,48 @@ public class MecanumDriveChassis
       YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
       double yaw = orientation.getYaw(AngleUnit.DEGREES);
       telemetry.addData("Yaw is", yaw);
+      telemetry.addLine("Straightening yaw");
       telemetry.update();
-      if (yaw < 91 && yaw > 89)
+      if (yaw < 1 && yaw > -1)
       {
         break;
       }
       //Do nothing. Allows the motors to spin
     }
     stop_motors();
+  }
+  
+  public void straighten(double desiredYaw)
+  {
+    YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+    double yaw = orientation.getYaw(AngleUnit.DEGREES);
+    telemetry.addData("Yaw is:", yaw);
+    telemetry.update();
+    double ticksPerDegree = turnDistance / 90;
+    double changedYaw = yaw - desiredYaw;
+    int turnYawTicks = (int) (changedYaw * ticksPerDegree);
+    if (yaw > 0 && yaw <= 25)
+    {
+      turnRightDistance(turnYawTicks);
+    }
+    if (yaw < 0 && yaw >= -25)
+    {
+      turnLeftDistance(-turnYawTicks);
+    }
+    if (yaw < 360 && yaw >= 335)
+    {
+      changedYaw = yaw - (desiredYaw + 360);
+      turnYawTicks = (int) (changedYaw * ticksPerDegree);
+      turnLeftDistance(-turnYawTicks);
+    }
+    if (yaw > 360 && yaw <= 385)
+    {
+      changedYaw = yaw - (desiredYaw + 360);
+      turnYawTicks = (int) (changedYaw * ticksPerDegree);
+      turnRightDistance(turnYawTicks);
+    }
+    yaw = orientation.getYaw(AngleUnit.DEGREES);
+    telemetry.addData("Yaw is changing to:", desiredYaw);
+    telemetry.addData("Yaw is now:", yaw);
   }
 }
