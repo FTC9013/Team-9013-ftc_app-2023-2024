@@ -171,5 +171,6 @@ public abstract class Autonomous extends LinearOpMode
     driveChassis.moveForward(howFar);
   }
   
+  public abstract double backboardDirection();
   
 }

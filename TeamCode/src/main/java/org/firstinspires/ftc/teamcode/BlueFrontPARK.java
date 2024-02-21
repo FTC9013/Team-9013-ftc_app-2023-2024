@@ -13,6 +13,12 @@ public class BlueFrontPARK extends Autonomous
     return 0;
   }
   
+  @Override
+  public double backboardDirection()
+  {
+    return 90;
+  }
+  
   public void turnColor()
   {
     blang.turnBlue();

@@ -4,6 +4,12 @@ package org.firstinspires.ftc.teamcode;
 
 public abstract class AutonomousRedFront extends Autonomous
 {
+  @Override
+  public double backboardDirection()
+  {
+    return -90;
+  }
+  
   public void turnColor()
   {
     blang.turnRed();

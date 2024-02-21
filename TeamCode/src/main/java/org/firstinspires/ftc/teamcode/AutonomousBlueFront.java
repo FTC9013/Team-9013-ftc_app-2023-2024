@@ -4,6 +4,12 @@ package org.firstinspires.ftc.teamcode;
 
 public abstract class AutonomousBlueFront extends Autonomous
 {
+  @Override
+  public double backboardDirection()
+  {
+    return 90;
+  }
+  
   public void turnColor()
   {
     blang.turnBlue();
@@ -35,7 +41,6 @@ public abstract class AutonomousBlueFront extends Autonomous
         {
           driveChassis.moveForward(wallDist - propSensors.backDistance());
         }
-        
       } else
       {
         driveChassis.strafeLeft(strafeDist);
@@ -45,11 +50,14 @@ public abstract class AutonomousBlueFront extends Autonomous
           driveChassis.moveForward(wallDist - propSensors.backDistance());
         }
       }
+      driveChassis.straighten(0);
     }
     driveChassis.moveForward(10);
     driveChassis.turnLeft();
     goAwayFromLeftWall(77 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
     goBackboard(70);
+    driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(40);
   }
@@ -62,11 +70,17 @@ public abstract class AutonomousBlueFront extends Autonomous
     driveChassis.strafeRight(6);
     driveChassis.turnLeft();
     driveChassis.strafeLeft(4);
+    driveChassis.straighten(0);
     driveChassis.moveBackward(propSensors.backDistance() - 0.5);
+    driveChassis.straighten(0);
     driveChassis.strafeLeft(200);
+    driveChassis.straighten(0);
     driveChassis.turnLeft();
+    driveChassis.straighten(backboardDirection());
     goAwayFromLeftWall(92.5 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
     goBackboard(70);
+    driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(40);
   }
@@ -77,11 +91,16 @@ public abstract class AutonomousBlueFront extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(5);
     driveChassis.turnRight();
+    driveChassis.straighten(0);
     driveChassis.moveBackward(propSensors.backDistance() - 0.5);
+    driveChassis.straighten(0);
     driveChassis.strafeLeft(200);
     driveChassis.turnLeft();
+    driveChassis.straighten(backboardDirection());
     goAwayFromLeftWall(55 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
     goBackboard(70);
+    driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
     parkingBotCheckBlue(40);
   }
