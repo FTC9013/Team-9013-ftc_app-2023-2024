@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -12,6 +13,8 @@ public class ArmControl
   private final Servo gripper;
   //private final TouchSensor limitSwitch;
   private final Telemetry telemetry;
+  public TouchSensor touchSensor;
+
   
   
   ArmControl(HardwareMap hardwareMap, Telemetry theTelemetry)
@@ -30,21 +33,30 @@ public class ArmControl
     armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
   }
   
-  public void lower()
+  public void armLower()
   {
     
     armMotor.setPower(-0.6);
     telemetry.addData("Limit Switch is Pressed", "true");
+    if (!touchSensor.isPressed())
+    {
+      armMotor.setPower(-0.75);
+      telemetry.addLine("Goging downe in the G R I P P E R arm");
+    } else
+    {
+      telemetry.addLine("Stoping the G R I P P E R arm");
+      armStop();
+    }
     
   }
   
-  public void raise()
+  public void armRaise()
   {
     armMotor.setPower(0.6);
     telemetry.addData("Raising", "True");
   }
   
-  public void stop()
+  public void armStop()
   {
     
     //telemetry.addData("Limit Switch?", limitSwitch.isPressed() ? "Pressed" : "Not Pressed");

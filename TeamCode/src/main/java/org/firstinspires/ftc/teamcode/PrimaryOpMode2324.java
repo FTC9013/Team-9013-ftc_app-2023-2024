@@ -114,13 +114,13 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       }
       if (gamepad2.left_stick_y > 0.75)
       {
-        arm.raise();
+        arm.armRaise();
       } else if (gamepad2.left_stick_y < -0.75)
       {
-        arm.lower();
+        arm.armLower();
       } else
       {
-        arm.stop();
+        arm.armStop();
       }
       if (gamepad2.a)
       {
@@ -133,6 +133,10 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       if (gamepad2.right_bumper)
       {
         purplePixelDropper.lift();
+      }
+      if (prop_sensors.frontDistance() < 15)
+      {
+        driveChassis.stop_motors();
       }
       
       telemetry.update();

@@ -34,6 +34,7 @@ public class MecanumDriveChassis
   private static double leftRearDriveSpeed;
   private static double rightFrontDriveSpeed;
   private static double rightRearDriveSpeed;
+  public Prop_Sensors propSensors;
   // Robot speed [-1, 1].  (speed in any direction that is not rotational)
   // does not have any angular component, just scaler velocity.
   // combined with the angular component for motion.  Even if angle is 0 (forward).
@@ -643,5 +644,8 @@ public class MecanumDriveChassis
     yaw = orientation.getYaw(AngleUnit.DEGREES);
     telemetry.addData("Yaw is changing to:", desiredYaw);
     telemetry.addData("Yaw is now:", yaw);
+  }
+  public void positionForArm() {
+    moveBackward(propSensors.backDistance() - 4);
   }
 }

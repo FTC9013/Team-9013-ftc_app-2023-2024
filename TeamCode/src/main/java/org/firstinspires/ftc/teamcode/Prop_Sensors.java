@@ -38,6 +38,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
+import java.util.Arrays;
+
 import androidx.annotation.NonNull;
 
 /*
@@ -71,34 +73,84 @@ public class Prop_Sensors
   public double frontDistance()
   {
     
-    return frontSensor.getDistance(DistanceUnit.CM);
+    //return frontSensor.getDistance(DistanceUnit.CM);
     
-    /*double readings[] = new double[10];
+    double readings[] = new double[10];
     for (int i = 0; i <= 9; i++)
     {
       readings[i] = frontSensor.getDistance(DistanceUnit.CM);
+      
     }
+    Arrays.sort(readings);
+    
     double averageReadings = 0;
-    for (int i = 0; i <= 9; i++)
+    for (int i = 2; i <= 7; i++)
     {
+      telemetry.addData("font dist is", readings[i]);
       averageReadings += readings[i];
     }
-    return averageReadings / 10; */
+    
+    return averageReadings / 6;
   }
   
   public double leftDistance()
   {
-    return leftSensor.getDistance(DistanceUnit.CM);
+    double readings[] = new double[10];
+    for (int i = 0; i <= 9; i++)
+    {
+      readings[i] = leftSensor.getDistance(DistanceUnit.CM);
+      
+    }
+    Arrays.sort(readings);
+    
+    double averageReadings = 0;
+    for (int i = 2; i <= 7; i++)
+    {
+      telemetry.addData("left dist is", readings[i]);
+      averageReadings += readings[i];
+    }
+    
+    return averageReadings / 6;
   }
   
   public double rightDistance()
   {
-    return rightSensor.getDistance(DistanceUnit.CM);
+    double readings[] = new double[10];
+    for (int i = 0; i <= 9; i++)
+    {
+      readings[i] = rightSensor.getDistance(DistanceUnit.CM);
+      
+    }
+    Arrays.sort(readings);
+    
+    double averageReadings = 0;
+    for (int i = 2; i <= 7; i++)
+    {
+      telemetry.addData("rigt dist is", readings[i]);
+      averageReadings += readings[i];
+    }
+    
+    return averageReadings / 6;
   }
   
   public double backDistance()
   {
-    return backSensor.getDistance(DistanceUnit.CM);
+    double readings[] = new double[10];
+    for (int i = 0; i <= 9; i++)
+    {
+      readings[i] = backSensor.getDistance(DistanceUnit.CM);
+      
+    }
+    Arrays.sort(readings);
+    
+    double averageReadings = 0;
+    for (int i = 2; i <= 7; i++)
+    {
+      telemetry.addData("back dist is", readings[i]);
+      averageReadings += readings[i];
+    }
+    
+    return averageReadings / 6;
   }
   
   /** The colorSensor field will contain a reference to our color sensor hardware object */
