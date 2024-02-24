@@ -21,10 +21,14 @@ public abstract class AutonomousRedBack extends Autonomous
     telemetry.update();
     driveChassis.moveBackward(8);
     driveChassis.turnRight();
+    driveChassis.straighten(backboardDirection());
     goBackboard(105);
-    goAwayFromRightWall(63 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
+    goAwayFromRightWall(62 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckRed(40);
+    driveChassis.strafeLeft(65);
+    driveChassis.moveForward(20);
   }
   
   public void goRight()
@@ -34,10 +38,14 @@ public abstract class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.strafeRight(60);
     driveChassis.moveForward(60);
-    goAwayFromRightWall(50 + yellowOffset());
-    goBackboard(70);
+    driveChassis.straighten(backboardDirection());
+    goAwayFromRightWall(53 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
+    goBackboard(72);
+    driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckRed(40);
+    driveChassis.strafeLeft(65);
+    driveChassis.moveForward(20);
   }
   
   public void goLeft()
@@ -47,10 +55,14 @@ public abstract class AutonomousRedBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.turnRight();
     driveChassis.turnRight();
-    goAwayFromRightWall(70 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
+    goAwayFromRightWall(76 + yellowOffset());
+    driveChassis.straighten(backboardDirection());
     goBackboard(100);
+    driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckRed(40);
+    driveChassis.strafeRight(65);
+    driveChassis.moveForward(20);
   }
   
   

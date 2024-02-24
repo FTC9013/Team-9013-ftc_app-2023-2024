@@ -645,7 +645,4 @@ public class MecanumDriveChassis
     telemetry.addData("Yaw is changing to:", desiredYaw);
     telemetry.addData("Yaw is now:", yaw);
   }
-  public void positionForArm() {
-    moveBackward(propSensors.backDistance() - 4);
-  }
 }

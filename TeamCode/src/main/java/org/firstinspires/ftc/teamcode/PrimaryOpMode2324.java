@@ -94,11 +94,11 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       {
         airplane.resetLauncher();
       }
-      if (gamepad1.right_bumper && gamepad1.right_trigger > 0.75)
+      if (gamepad2.right_bumper && gamepad2.right_trigger > 0.75)
       {
         purplePixelDropper.drop_pixel();
       }
-      if (gamepad1.left_bumper && gamepad1.left_trigger > 0.75)
+      if (gamepad2.left_bumper && gamepad2.left_trigger > 0.75)
       {
         yellowPixelDropper.drop_pixel();
       }
@@ -134,9 +134,13 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       {
         purplePixelDropper.lift();
       }
-      if (prop_sensors.frontDistance() < 15)
+      if (gamepad2.dpad_right)
       {
-        driveChassis.stop_motors();
+        driveChassis.strafeLeft(1);
+      }
+      if (gamepad2.dpad_left)
+      {
+        driveChassis.strafeRight(1);
       }
       
       telemetry.update();
@@ -150,5 +154,11 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
       // Pace this loop so jaw action is reasonable speed.
       sleep(50);
     }
+  }
+  
+  public void positionForArm()
+  {
+    driveChassis.moveBackward(prop_sensors.backDistance() - 4);
+    arm.armRaise();
   }
 }

@@ -38,6 +38,7 @@ public abstract class AutonomousBlueBack extends Autonomous
     driveChassis.moveBackward(11);
     driveChassis.turnLeft();
     driveChassis.turnLeft();
+    driveChassis.straighten(backboardDirection());
     goBackboard(95);
     driveChassis.straighten(backboardDirection());
     goAwayFromLeftWall(76 + yellowOffset());

@@ -14,7 +14,6 @@ public class ArmControl
   //private final TouchSensor limitSwitch;
   private final Telemetry telemetry;
   public TouchSensor touchSensor;
-
   
   
   ArmControl(HardwareMap hardwareMap, Telemetry theTelemetry)
@@ -23,6 +22,7 @@ public class ArmControl
     // Initialize the hardware variables
     armMotor = hardwareMap.get(DcMotor.class, "arm");
     gripper = hardwareMap.get(Servo.class, "gripper");
+    touchSensor = hardwareMap.get(TouchSensor.class, "arm_failsafe");
     gripper.setPosition(0);
     //limitSwitch = hardwareMap.get(TouchSensor.class, "limitSwitch");
     armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
