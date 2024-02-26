@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -17,6 +18,15 @@ public class IMUTest extends LinearOpMode
   public void runOpMode()
   {
     imu = hardwareMap.get(IMU.class, "imu");
+    RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.UP;
+    RevHubOrientationOnRobot.UsbFacingDirection usbDirection = RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
+    
+    RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
+    
+    // Now initialize the IMU with this mounting orientation
+    // Note: if you choose two conflicting directions, this initialization will cause a code exception.
+    imu.initialize(new IMU.Parameters(orientationOnRobot));
+    imu.resetYaw();
     driveChassis = new MecanumDriveChassis(hardwareMap, telemetry);
     telemetry.addData("Status", "Initialized");
     telemetry.update();
@@ -34,8 +44,7 @@ public class IMUTest extends LinearOpMode
       telemetry.update();
       
       
-      
-      /*driveChassis.moveForward(10);
+      driveChassis.moveForward(10);
       telemetry.addLine("Moved Forward");
       driveChassis.turnRightDistance(100);
       telemetry.addLine("Turned Right");
@@ -44,7 +53,7 @@ public class IMUTest extends LinearOpMode
       telemetry.addLine("Straightened");
       sleep(5000);
       telemetry.addLine("Done and waitin.");
-      telemetry.update();*/
+      telemetry.update();
     }
   }
 }
