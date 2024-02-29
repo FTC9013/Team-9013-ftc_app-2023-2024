@@ -72,8 +72,8 @@ public class Prop_Sensors
   
   public double frontDistance()
   {
-    
     return frontSensor.getDistance(DistanceUnit.CM);
+
     
     /*double readings[] = new double[10];
     for (int i = 0; i <= 9; i++)
@@ -84,17 +84,19 @@ public class Prop_Sensors
     Arrays.sort(readings);
     
     double averageReadings = 0;
-    for (int i = 2; i <= 7; i++)
+    for (int i = 4; i <= 6; i++)
     {
       telemetry.addData("font dist is", readings[i]);
       averageReadings += readings[i];
     }
     
-    return averageReadings / 6;*/
+    return averageReadings / 3;
+    */
   }
   
   public double leftDistance()
   {
+    //return leftSensor.getDistance(DistanceUnit.CM);
     double readings[] = new double[10];
     for (int i = 0; i <= 9; i++)
     {
@@ -104,17 +106,19 @@ public class Prop_Sensors
     Arrays.sort(readings);
     
     double averageReadings = 0;
-    for (int i = 2; i <= 7; i++)
+    for (int i = 4; i <= 6; i++)
     {
       telemetry.addData("left dist is", readings[i]);
       averageReadings += readings[i];
     }
     
-    return averageReadings / 6;
+    return averageReadings / 3;
+    
   }
   
   public double rightDistance()
   {
+    //return rightSensor.getDistance(DistanceUnit.CM);
     double readings[] = new double[10];
     for (int i = 0; i <= 9; i++)
     {
@@ -124,18 +128,20 @@ public class Prop_Sensors
     Arrays.sort(readings);
     
     double averageReadings = 0;
-    for (int i = 2; i <= 7; i++)
+    for (int i = 4; i <= 6; i++)
     {
       telemetry.addData("rigt dist is", readings[i]);
       averageReadings += readings[i];
     }
     
-    return averageReadings / 6;
+    return averageReadings / 3;
+    
   }
   
   public double backDistance()
   {
-    double readings[] = new double[10];
+    return backSensor.getDistance(DistanceUnit.CM);
+    /*double readings[] = new double[10];
     for (int i = 0; i <= 9; i++)
     {
       readings[i] = backSensor.getDistance(DistanceUnit.CM);
@@ -144,13 +150,14 @@ public class Prop_Sensors
     Arrays.sort(readings);
     
     double averageReadings = 0;
-    for (int i = 2; i <= 7; i++)
+    for (int i = 4; i <= 6; i++)
     {
       telemetry.addData("back dist is", readings[i]);
       averageReadings += readings[i];
     }
     
-    return averageReadings / 6;
+    return averageReadings / 3;
+    */
   }
   
   /** The colorSensor field will contain a reference to our color sensor hardware object */

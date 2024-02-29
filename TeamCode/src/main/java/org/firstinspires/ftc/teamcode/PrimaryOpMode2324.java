@@ -158,7 +158,7 @@ public abstract class PrimaryOpMode2324 extends LinearOpMode
   
   public void positionForArm()
   {
-    driveChassis.moveBackward(prop_sensors.backDistance() - 4);
+    driveChassis.moveBackward(prop_sensors.backDistance() - 1);
     arm.armRaise();
   }
 }

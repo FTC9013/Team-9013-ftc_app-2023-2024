@@ -36,11 +36,10 @@ public class ArmControl
   public void armLower()
   {
     
-    armMotor.setPower(-0.6);
-    telemetry.addData("Limit Switch is Pressed", "true");
+    
     if (!touchSensor.isPressed())
     {
-      armMotor.setPower(-0.75);
+      armMotor.setPower(0.7);
       telemetry.addLine("Goging downe in the G R I P P E R arm");
     } else
     {
@@ -52,8 +51,8 @@ public class ArmControl
   
   public void armRaise()
   {
-    armMotor.setPower(0.6);
-    telemetry.addData("Raising", "True");
+    armMotor.setPower(-0.6);
+    telemetry.addData("Raising G R I P P E R", "True");
   }
   
   public void armStop()
@@ -72,6 +71,6 @@ public class ArmControl
     {
       gripper.setPosition(1);
     }
-    telemetry.addData("Gripping", "True");
+    telemetry.addData("G R I P P I N G", "True");
   }
 }

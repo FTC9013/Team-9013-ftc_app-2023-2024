@@ -7,7 +7,7 @@ public class AutonomousRedFrontRight extends AutonomousRedFront
   @Override
   public double yellowOffset()
   {
-    return -5.5;
+    return -11;
   }
 }
   

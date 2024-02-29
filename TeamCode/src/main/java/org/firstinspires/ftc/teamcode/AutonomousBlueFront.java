@@ -22,6 +22,7 @@ public abstract class AutonomousBlueFront extends Autonomous
     driveChassis.moveForward(2);
     telemetry.addLine("PROP DETECTION: Its no left or right so its foward");
     telemetry.update();
+    sleep(5000);
     driveChassis.strafeRight(9);
     
     driveChassis.moveBackward(propSensors.backDistance() - 5);
@@ -59,13 +60,13 @@ public abstract class AutonomousBlueFront extends Autonomous
     goBackboard(70);
     driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(40);
   }
   
   public void goRight()
   {
     telemetry.addLine("PROP DETECTION: Right");
     telemetry.update();
+    sleep(5000);
     driveChassis.moveBackward(3);
     driveChassis.strafeRight(6);
     driveChassis.turnLeft();
@@ -82,13 +83,13 @@ public abstract class AutonomousBlueFront extends Autonomous
     goBackboard(70);
     driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(40);
   }
   
   public void goLeft()
   {
     telemetry.addLine("PROP DETECTION: Lefte");
     telemetry.update();
+    sleep(5000);
     driveChassis.moveBackward(5);
     driveChassis.turnRight();
     driveChassis.straighten(0);
@@ -102,7 +103,6 @@ public abstract class AutonomousBlueFront extends Autonomous
     goBackboard(70);
     driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    parkingBotCheckBlue(40);
   }
 }
   

@@ -24,7 +24,7 @@ public abstract class AutonomousRedBack extends Autonomous
     driveChassis.straighten(backboardDirection());
     goBackboard(105);
     driveChassis.straighten(backboardDirection());
-    goAwayFromRightWall(64 + yellowOffset());
+    goAwayFromRightWall(67 + yellowOffset());
     driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
     driveChassis.strafeLeft(75);
@@ -44,7 +44,7 @@ public abstract class AutonomousRedBack extends Autonomous
     goBackboard(72);
     driveChassis.straighten(backboardDirection());
     pixelDropperYellow.drop_pixel();
-    driveChassis.strafeLeft(80);
+    driveChassis.strafeLeft(110);
     driveChassis.moveForward(20);
   }
   
@@ -56,7 +56,7 @@ public abstract class AutonomousRedBack extends Autonomous
     driveChassis.turnRight();
     driveChassis.turnRight();
     driveChassis.straighten(backboardDirection());
-    goAwayFromRightWall(72 + yellowOffset()); // used to be 72 from right wall
+    goAwayFromRightWall(75 + yellowOffset()); // used to be 72 from right wall
     driveChassis.straighten(backboardDirection());
     goBackboard(100);
     driveChassis.straighten(backboardDirection());
